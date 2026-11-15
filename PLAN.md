@@ -58,6 +58,7 @@
 - 允许路径：`packages/bundle/src/client/harness/client.ts`、相关测试、`docs/`、`DESIGN.md`、`PLAN.md`；禁止修改官方 DSH 源码、官方运行时二进制、模型配置和用户数据。
 - 成功标准：干净个人 Profile 首次启动不显示该说明卡片；主界面、Conversation、模型设置、专家/技能/连接器入口和 Host ready 仍可用；已初始化 Profile 重启不回归。失败按错误分诊规则换新 runId。
 - 回滚：移除 WorkDSH 自有的 slot suppression 代码并恢复本批次前的 bundle 构建产物；官方包、用户配置和现有专家快照不变。
+- 实施结果：提交 `236bf76f4f106db1c373f6562d8de87d7264f783` 已通过 Bundle 类型检查和构建；r70 干净个人 Home 进入主界面，未显示该弹窗，Host 在 `127.0.0.1:3080` 监听，专家入口显示 11 个（8 个预制专家 + 3 个原始专家）。详见 [2026-11-15-remove-preview-onboarding.md](docs/2026-11-15-remove-preview-onboarding.md) 和 [.runs/r70-remove-preview-onboarding-fresh-home-20261115-001/final-receipt.json](.runs/r70-remove-preview-onboarding-fresh-home-20261115-001/final-receipt.json)。
 
 ## 证据
 
