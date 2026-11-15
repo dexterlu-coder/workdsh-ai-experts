@@ -46,6 +46,12 @@
 - UI 验收：Electron 窗口标题 `WorkDSH`；个人模式 loading 页面完成；主导航可见 `专家 · 技能 · 连接器`、`资料库`、`工作台` 和原生 Conversation；账户/API Key 提示为当前空环境预期状态。
 - 完整回执：[.runs/r50-current-source-final-receipt.json](.runs/r50-current-source-final-receipt.json)。
 
+## 八个预制专家整合批次
+
+- `r63-seven-expert-runtime-retry-20261115-001`：在已有培训课程设计专家基础上，将其余 7 个 Skill 按同一发布时快照流程整合到当前源码；生成清单为 8 个专家，运行时和个人模式主界面均已验证。
+- 源码提交：`3db89e76b38208cec64e77898428ce3785f63022`；发布清单记录 `sourceDirty=false`，官方 DSH 版本为 `0.2.1-rc.5`。
+- 验收报告：[2026-11-15-eight-expert-integration.md](docs/2026-11-15-eight-expert-integration.md)；一次性运行回执：[.runs/r63-seven-expert-runtime-retry-20261115-001/final-receipt.json](.runs/r63-seven-expert-runtime-retry-20261115-001/final-receipt.json)。
+
 ## 证据
 
 - 启动经验固化与门禁：[docs/2026-11-15-startup-history-gate.md](docs/2026-11-15-startup-history-gate.md)

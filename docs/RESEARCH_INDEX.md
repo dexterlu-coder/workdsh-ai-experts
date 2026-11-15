@@ -1,6 +1,6 @@
 # WorkDSH 调研、经验与证据总目录
 
-最后更新：2026-11-15 12:10（Asia/Shanghai）
+最后更新：2026-11-15 13:12（Asia/Shanghai）
 维护规则：本目录由 [`AGENTS.md`](../AGENTS.md) 约束；新增、改名或删除调研报告、经验笔记、架构决策和稳定证据时，必须在同一变更中更新本文件。
 
 本文件是“去哪里找结论”的总入口，不替代各报告正文，也不把 `.runs` 下的一次性原始回执复制进长期文档。每条记录尽量标明材料性质：**官方声明、项目设计、源码事实、实验结果、推测/待验证**。
@@ -27,6 +27,7 @@
 | [`2026-11-15-eight-skill-expert-mapping.md`](2026-11-15-eight-skill-expert-mapping.md) | 2026-11-15 | 产品映射登记、历史规范整理 | 8 个 Skill 对应的 expert ID、中文入口、命名决策和实施边界 |
 | [`2026-11-15-training-course-expert-snapshot-audit.md`](2026-11-15-training-course-expert-snapshot-audit.md) | 2026-11-15 | 源码校验、历史快照对比 | 历史专家包结构校验结果、Skill 内容漂移和重新生成决定 |
 | [`2026-11-15-training-course-expert-pre-release.md`](2026-11-15-training-course-expert-pre-release.md) | 2026-11-15 | 实施回执、预发布验收 | 培训课程设计专家快照、当前源码接入、预发布包和测试边界 |
+| [`2026-11-15-eight-expert-integration.md`](2026-11-15-eight-expert-integration.md) | 2026-11-15 | 实施回执、构建/测试/UI 验收 | 8 个预制 Skill 专家整合、运行时清单、发布提交和人工验收入口 |
 
 ## 3. 启动与安装证据
 
