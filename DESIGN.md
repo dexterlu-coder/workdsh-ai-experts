@@ -13,6 +13,10 @@
 - 当前个人模式的新证据确认两处独立启动故障：`workdsh-plugin-experts` 的 `installExpertPresetMenu()` 异步 slot 回调会在 Cordis Fiber 失效后调用 `slots.register()`；Desktop `startRuntime()` 只从 stdout 解析 Host ready，而 Host ready 也可能出现在 stderr。两处都已形成最小实验与源码修复。
 - 当前源码个人模式最终启动又确认第三处竞态：`startRuntime()` 在入口切换仍为 `switching=true` 时会丢弃一次性 Host ready URL；当前 Profile 冷启动足够快时会稳定复现 loading 卡住。修复后通过普通 Node wrapper、当前仓库 Electron 和当前源码构建的 WorkDSH UI/Experts 包进入主界面。
 
+## 当前首启提示批次
+
+用户于 2026-11-15 明确授权移除启动时的官方“预览版说明”首启提示。只允许通过公开的 `settings.onboarding` 插槽按稳定 ID `welcome-notice` 注册一个空组件，抑制该单一说明卡片；不修改官方 DSH 包字节，不改模型配置、Conversation、Composer、右侧面板、专家入口或首启配置状态。该批次的事实、验收和回滚见 [PLAN.md](PLAN.md) 与 [docs/2026-11-15-remove-preview-onboarding.md](docs/2026-11-15-remove-preview-onboarding.md)。
+
 ## 参考入口
 
 - 详细分析：[docs/2026-11-14-electron-temporary-environment-first-principles.md](docs/2026-11-14-electron-temporary-environment-first-principles.md)

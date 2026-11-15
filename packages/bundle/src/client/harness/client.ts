@@ -27,6 +27,35 @@ declare module '@deepseek-ai/dsh-client-ui-sidebar-right/client' {
 export const name = 'workdsh-client';
 export const inject = ['slots', 'layout', 'remote', 'remote.pluginInventory', 'sessions', 'sidebarRight', 'sidebarRightTabs'];
 
+/**
+ * Suppress only the official first-run preview notice. The notice is owned by
+ * DSH's public onboarding slot; keeping this seam in WorkDSH avoids changing
+ * the official package while preserving every other onboarding/settings path.
+ */
+function installPreviewNoticeSuppression(ctx: Context): void {
+  ctx.slots.inject('settings.onboarding', () => {
+    const slots = ctx.slots;
+    let native: unknown;
+    let remove = () => {};
+    const reconcile = () => {
+      const next = slots.entries('settings.onboarding').find(entry => entry.options.id === 'welcome-notice' && (entry.options.priority ?? 0) === 0);
+      if (native === next) return;
+      remove();
+      native = next;
+      if (!next) {
+        remove = () => {};
+        return;
+      }
+      if (next.children) throw new Error('Unreviewed native welcome child-slot contract');
+      remove = slots.register({ name: 'settings.onboarding', id: 'welcome-notice', priority: -10,
+        inject: () => ({}) }, () => null);
+    };
+    const unsubscribe = slots.subscribe('settings.onboarding', reconcile);
+    reconcile();
+    return () => { unsubscribe(); remove(); };
+  });
+}
+
 const productViews: Readonly<Record<string, string>> = {
   experts: 'workdsh-experts', skills: 'workdsh-skills', assistant: 'workdsh-assistant', projects: 'workdsh-projects', 'project-detail': 'workdsh-project-detail',
   library: 'workdsh-library', automation: 'workdsh-automation', more: 'workdsh-more',
@@ -34,6 +63,7 @@ const productViews: Readonly<Record<string, string>> = {
 
 export function apply(ctx: Context): void {
   installFreshSessionNavigation(ctx);
+  installPreviewNoticeSuppression(ctx);
   ctx.inject(['market'], scope => {
     if (scope.market.version !== 1) return;
     scope.market.setSettingsVisible(false);

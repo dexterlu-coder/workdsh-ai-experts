@@ -28,6 +28,7 @@
 | [`2026-11-15-training-course-expert-snapshot-audit.md`](2026-11-15-training-course-expert-snapshot-audit.md) | 2026-11-15 | 源码校验、历史快照对比 | 历史专家包结构校验结果、Skill 内容漂移和重新生成决定 |
 | [`2026-11-15-training-course-expert-pre-release.md`](2026-11-15-training-course-expert-pre-release.md) | 2026-11-15 | 实施回执、预发布验收 | 培训课程设计专家快照、当前源码接入、预发布包和测试边界 |
 | [`2026-11-15-eight-expert-integration.md`](2026-11-15-eight-expert-integration.md) | 2026-11-15 | 实施回执、构建/测试/UI 验收 | 8 个预制 Skill 专家整合、运行时清单、发布提交和人工验收入口 |
+| [`2026-11-15-remove-preview-onboarding.md`](2026-11-15-remove-preview-onboarding.md) | 2026-11-15 | 源码审计、范围登记、实施计划 | 官方首启预览说明的 owner、公开插槽抑制方案和验收/回滚边界 |
 
 ## 3. 启动与安装证据
 

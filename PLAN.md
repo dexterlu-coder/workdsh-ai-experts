@@ -52,6 +52,13 @@
 - 源码提交：`3db89e76b38208cec64e77898428ce3785f63022`；发布清单记录 `sourceDirty=false`，官方 DSH 版本为 `0.2.1-rc.5`。
 - 验收报告：[2026-11-15-eight-expert-integration.md](docs/2026-11-15-eight-expert-integration.md)；一次性运行回执：[.runs/r63-seven-expert-runtime-retry-20261115-001/final-receipt.json](.runs/r63-seven-expert-runtime-retry-20261115-001/final-receipt.json)。
 
+## 首启预览说明抑制批次
+
+- `r64-remove-preview-onboarding-20261115-001`：用户授权移除启动时官方“预览版说明”弹窗。Astra 只读审计确认仓库源码没有该文案；历史运行副本的 `workdsh-bundle/dist/client/harness/welcome-brand.js` 只改写官方 `settings.onboarding` 的 `welcome-notice`。本批次只在 WorkDSH bundle 的公开 Client 插槽中抑制该单一入口。
+- 允许路径：`packages/bundle/src/client/harness/client.ts`、相关测试、`docs/`、`DESIGN.md`、`PLAN.md`；禁止修改官方 DSH 源码、官方运行时二进制、模型配置和用户数据。
+- 成功标准：干净个人 Profile 首次启动不显示该说明卡片；主界面、Conversation、模型设置、专家/技能/连接器入口和 Host ready 仍可用；已初始化 Profile 重启不回归。失败按错误分诊规则换新 runId。
+- 回滚：移除 WorkDSH 自有的 slot suppression 代码并恢复本批次前的 bundle 构建产物；官方包、用户配置和现有专家快照不变。
+
 ## 证据
 
 - 启动经验固化与门禁：[docs/2026-11-15-startup-history-gate.md](docs/2026-11-15-startup-history-gate.md)
