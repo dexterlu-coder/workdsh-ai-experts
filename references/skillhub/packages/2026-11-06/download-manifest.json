@@ -1,0 +1,98 @@
+[
+  {
+    "slug": "training-needs-diagnosistraining-needs-analysistraining-needs-survey",
+    "version": "1.0.0",
+    "source_url": "https://api.skillhub.cn/api/v1/download?slug=training-needs-diagnosistraining-needs-analysistraining-needs-survey&version=1.0.0",
+    "final_url": "https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/102289/training-needs-diagnosistraining-needs-analysistraining-needs-survey/1.0.0.zip",
+    "http_status": "200",
+    "exit_code": 0,
+    "size_bytes": 18520,
+    "sha256": "b8c006f25204dac8cb6c6cee6e4c12391037be37ea3bf04a083b9f4f261ae561",
+    "started_utc": "2026-11-06T14:21:30.4327716Z",
+    "curl_output": "\nHTTP_STATUS=200\nFINAL_URL=https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/102289/training-needs-diagnosistraining-needs-analysistraining-needs-survey/1.0.0.zip"
+  },
+  {
+    "slug": "enterprise-knowledge-extraction-assistant",
+    "version": "1.0.0",
+    "source_url": "https://api.skillhub.cn/api/v1/download?slug=enterprise-knowledge-extraction-assistant&version=1.0.0",
+    "final_url": "https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/259448/enterprise-knowledge-extraction-assistant/1.0.0.zip",
+    "http_status": "200",
+    "exit_code": 0,
+    "size_bytes": 30726,
+    "sha256": "092807877182287a9c49e4d3ea63b4321d752654d9b41365a35069144ec0f174",
+    "started_utc": "2026-11-06T14:21:31.3863771Z",
+    "curl_output": "\nHTTP_STATUS=200\nFINAL_URL=https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/259448/enterprise-knowledge-extraction-assistant/1.0.0.zip"
+  },
+  {
+    "slug": "training-course-designer",
+    "version": "1.0.0",
+    "source_url": "https://api.skillhub.cn/api/v1/download?slug=training-course-designer&version=1.0.0",
+    "final_url": "https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/training-course-designer/1.0.0.zip",
+    "http_status": "200",
+    "exit_code": 0,
+    "size_bytes": 44286,
+    "sha256": "502f5146872ef01fbdcec2aa30132197de630d75b573a37c9dd7e099f9af18d6",
+    "started_utc": "2026-11-06T14:21:31.8256977Z",
+    "curl_output": "\nHTTP_STATUS=200\nFINAL_URL=https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/training-course-designer/1.0.0.zip"
+  },
+  {
+    "slug": "ai-learning-coach",
+    "version": "1.0.0",
+    "source_url": "https://api.skillhub.cn/api/v1/download?slug=ai-learning-coach&version=1.0.0",
+    "final_url": "https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/ai-learning-coach/1.0.0.zip",
+    "http_status": "200",
+    "exit_code": 0,
+    "size_bytes": 21785,
+    "sha256": "940e5ff4112badb53b1050ed6943ec28663e8c3f2a09ae8a3ed5cc2c671f2edb",
+    "started_utc": "2026-11-06T14:21:32.4033239Z",
+    "curl_output": "\nHTTP_STATUS=200\nFINAL_URL=https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/ai-learning-coach/1.0.0.zip"
+  },
+  {
+    "slug": "exam-evaluator",
+    "version": "1.3.1",
+    "source_url": "https://api.skillhub.cn/api/v1/download?slug=exam-evaluator&version=1.3.1",
+    "final_url": "https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/76878/exam-evaluator/1.3.1.zip",
+    "http_status": "200",
+    "exit_code": 0,
+    "size_bytes": 44570,
+    "sha256": "4956c62ff45d597bb225c6dd71f8f10896f6f83f0a8aa6d60cd21e8316167da6",
+    "started_utc": "2026-11-06T14:21:32.8590502Z",
+    "curl_output": "\nHTTP_STATUS=200\nFINAL_URL=https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/76878/exam-evaluator/1.3.1.zip"
+  },
+  {
+    "slug": "llm-wiki",
+    "version": "1.0.1",
+    "source_url": "https://api.skillhub.cn/api/v1/download?slug=llm-wiki&version=1.0.1",
+    "final_url": "https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/llm-wiki/1.0.1.zip",
+    "http_status": "200",
+    "exit_code": 0,
+    "size_bytes": 31950,
+    "sha256": "895fac71d2331b686b1c37596e1cd5b3719a8d12a73418b9704941b06f8c320c",
+    "started_utc": "2026-11-06T14:21:33.3676217Z",
+    "curl_output": "\nHTTP_STATUS=200\nFINAL_URL=https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/llm-wiki/1.0.1.zip"
+  },
+  {
+    "slug": "idp-development-plan-generator",
+    "version": "1.0.0",
+    "source_url": "https://api.skillhub.cn/api/v1/download?slug=idp-development-plan-generator&version=1.0.0",
+    "final_url": "https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/109236/idp-development-plan-generator/1.0.0.zip",
+    "http_status": "200",
+    "exit_code": 0,
+    "size_bytes": 6291,
+    "sha256": "02ac098143e1ca8c6893a5127163a97c2e30ca20a55666cb301d31f938ea3394",
+    "started_utc": "2026-11-06T14:21:33.7899989Z",
+    "curl_output": "\nHTTP_STATUS=200\nFINAL_URL=https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/109236/idp-development-plan-generator/1.0.0.zip"
+  },
+  {
+    "slug": "business-operations-analysis",
+    "version": "1.0.1",
+    "source_url": "https://api.skillhub.cn/api/v1/download?slug=business-operations-analysis&version=1.0.1",
+    "final_url": "https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/96051/business-operations-analysis/1.0.1.zip",
+    "http_status": "200",
+    "exit_code": 0,
+    "size_bytes": 21677,
+    "sha256": "3a5a0c18e44b5237e587ef76b53871d547eb9afb02ccaf59dc10d00da8ae72af",
+    "started_utc": "2026-11-06T14:21:34.2340749Z",
+    "curl_output": "\nHTTP_STATUS=200\nFINAL_URL=https://skillhub-1388575217.cos.accelerate.myqcloud.com/skills/96051/business-operations-analysis/1.0.1.zip"
+  }
+]
