@@ -1,6 +1,6 @@
 # WorkDSH 调研、经验与证据总目录
 
-最后更新：2026-11-15 09:08（Asia/Shanghai）  
+最后更新：2026-11-15 12:10（Asia/Shanghai）
 维护规则：本目录由 [`AGENTS.md`](../AGENTS.md) 约束；新增、改名或删除调研报告、经验笔记、架构决策和稳定证据时，必须在同一变更中更新本文件。
 
 本文件是“去哪里找结论”的总入口，不替代各报告正文，也不把 `.runs` 下的一次性原始回执复制进长期文档。每条记录尽量标明材料性质：**官方声明、项目设计、源码事实、实验结果、推测/待验证**。
@@ -20,6 +20,7 @@
 | --- | --- | --- | --- |
 | [`2026-11-14-electron-temporary-environment-first-principles.md`](2026-11-14-electron-temporary-environment-first-principles.md) | 2026-11-14 | 第一性原理分析、实验结果 | 解释临时环境与当前源码启动差异、ACL、Electron 沙箱和运行时配对 |
 | [`evidence/startup-methodology-20261115.md`](evidence/startup-methodology-20261115.md) | 2026-11-15 | 经验总结、操作协议 | 启动分层、错误分诊、单变量实验、窗口/Host/退出验收 |
+| [`2026-11-15-startup-history-gate.md`](2026-11-15-startup-history-gate.md) | 2026-11-15 | 经验固化、启动前门禁 | 将历史成功路径固化为 DACL、清洁环境、Node wrapper、分层验收和失败换 run 规则 |
 | [`2026-11-15-expert-prepack-research.md`](2026-11-15-expert-prepack-research.md) | 2026-11-15 | 源码事实、官方资料核对 | 预制专家链路、Skill 依赖、MCP/连接器边界和打包路径 |
 | [`expert-prepack-PROMPT_SPEC.md`](expert-prepack-PROMPT_SPEC.md) | 2026-11-15 | 待实施规格模板 | 新增预制专家必须提供的名称、职责、输入、输出和能力依赖 |
 | [`2026-11-15-ai-learning-coach-integration-audit.md`](2026-11-15-ai-learning-coach-integration-audit.md) | 2026-11-15 | 源码事实、隔离实验、发布门 | 内置目录、官方 provider 兼容性和许可证阻塞证据 |

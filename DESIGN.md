@@ -16,6 +16,7 @@
 ## 参考入口
 
 - 详细分析：[docs/2026-11-14-electron-temporary-environment-first-principles.md](docs/2026-11-14-electron-temporary-environment-first-principles.md)
+- 启动经验门禁：[docs/2026-11-15-startup-history-gate.md](docs/2026-11-15-startup-history-gate.md)
 - 运行证据索引：[references/startup-evidence-20261114/README.md](references/startup-evidence-20261114/README.md)
 - 原始复现记录：[docs/evidence/electron-network-sandbox-r61-repro-20261114.txt](docs/evidence/electron-network-sandbox-r61-repro-20261114.txt)
 - 实施与验收：[PLAN.md](PLAN.md)

@@ -85,6 +85,7 @@
 - PowerShell 变量名大小写不敏感，`$HOME`/`$home` 是只读的用户目录自动变量；临时路径必须使用明确的任务变量名（例如 `$dshHomePath`），不得覆盖或复用这些名称。执行递归删除、移动或复制前，先解析并打印绝对源/目标路径，确认目标仍在本次授权的工作区内；路径校验异常或命令出现非预期输出时立即停止并按错误分诊记录，禁止继续重试。
 - 个人模式、企业模式、内置 DSH 版本、安装目录和用户数据分开记录。手工依赖修复必须保留原始故障、变更、版本和回滚方法。
 - 启动和退出排查同时检查窗口、`second-instance`、`before-quit`、DSH Host、子进程和最终存活状态；“调用了清理命令”不等于“进程已退出”。
+- 历史成功启动路径必须作为启动前门禁执行：固定源码提交、Electron/Profile/primary runtime 版本和哈希；使用标准受保护 DACL 的独立运行根目录、独立 user-data/`DSH_HOME`/`DSH_AGENTS_HOME`/临时目录、清洁环境和普通 Node wrapper；先验收 Electron 窗口，再验收个人入口、Host ready、Web boot、主界面和专家入口。不得把默认 PowerShell 的 `corepack yarn start`、端口监听或 loading 页面单独当作成功证据；失败先分诊并新建 `runId`，不得在原 run 上盲目重试。具体清单见 [`docs/2026-11-15-startup-history-gate.md`](docs/2026-11-15-startup-history-gate.md)。
 - 二次开发优先使用 Profile、插件和公开 API。修改 Electron 外壳、DSH Host、Agent Loop、官方运行时或打包流程，原则上必须固定上游基线、建立独立分支、登记修改范围并取得单独授权。当前已明确授权的 `native-workbench-frame-patch` two-seam exception 按其限定范围执行：只允许修改两个 outer-frame seam，用于恢复完整的原生 Conversation。
 
   此外，本次已授权需求增加一个独立的 Conversation branding exception，仅允许修改官方聊天界面的静态初始标题和品牌图标。该例外不允许修改 Conversation 的布局、交互、Composer、消息视图、右侧面板、Host、Agent、模型调用或会话存储，也不允许复制或重写官方聊天控件。

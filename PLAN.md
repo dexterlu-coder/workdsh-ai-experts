@@ -48,6 +48,7 @@
 
 ## 证据
 
+- 启动经验固化与门禁：[docs/2026-11-15-startup-history-gate.md](docs/2026-11-15-startup-history-gate.md)
 - [COMPARISON-RESULT.json](.runs/electron-matrix-r61-20261114/r42-standard-acl/COMPARISON-RESULT.json)
 - [MATRIX-RESULT.json](.runs/electron-matrix-r61-20261114/MATRIX-RESULT.json)
 - [原始复现记录](docs/evidence/electron-network-sandbox-r61-repro-20261114.txt)
