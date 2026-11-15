@@ -2,13 +2,13 @@
 
 登记日期：2026-11-15  
 批次：`r55-eight-skill-expert-mapping-20261115-001`  
-状态：`mapping-recorded / training-course-designer-integrated / remaining-seven-pending`
+状态：`mapping-recorded / all-eight-integrated-in-r62`
 
 ## 一、登记范围
 
 本文件把历史 WorkDSH 规划中的 8 个第三方 Skill 映射为 8 个业务专家入口。它是后续专家定义、快照生成和菜单展示的规范输入之一；本轮只登记映射，不修改专家源码、Skill 源码、运行时或用户数据。
 
-当前进度：`training-course-designer` 已按该映射生成并接入当前专家插件预发布包；其余 7 项仍只完成映射登记。
+当前进度：8 个 Skill 均已按该映射生成固定资源快照并接入当前专家插件预发布包；`r62-seven-expert-packages-20261115-001` 保存了本轮输入、哈希和验证回执。
 
 许可证状态按用户本轮声明记录为：**已取得许可**。本轮尚未收到许可证原文、授权邮件或可核验文件路径，因此授权凭证仍需在实施批次中归档并计算哈希，不能仅凭本文件替代再分发证据。
 

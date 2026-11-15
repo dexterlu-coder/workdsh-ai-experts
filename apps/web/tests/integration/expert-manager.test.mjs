@@ -244,8 +244,8 @@ test('AT-01 experts list seeds defaults, searches, filters, pages and stays owne
   try {
     const a = actor('owner-a');
     const first = await h.experts.list(a, {});
-    assert.equal(first.total, 4, 'the three shipped defaults and one prebuilt expert seed on first read');
-    assert.deepEqual(first.items.map((item) => item.origin), ['default', 'default', 'default', 'default']);
+    assert.equal(first.total, 11, 'the three shipped defaults and eight prebuilt experts seed on first read');
+    assert.ok(first.items.every((item) => item.origin === 'default'), 'shipped and prebuilt experts share the default origin');
     assert.ok(first.items.every((item) => item.readiness === 'ready'), 'compiled default presets are healthy');
     assert.ok(first.items.every((item) => item.canUse && item.canManage && !item.canEdit), 'defaults are usable/manageable but not directly editable');
     assert.ok(first.items.every((item) => item.publishedRevisionRef !== undefined), 'defaults are published');
