@@ -1,0 +1,37 @@
+WorkDSH current-source startup diagnosis
+Date: 2026-11-14 Asia/Shanghai
+
+Historical evidence:
+- workdsh-ai-expert-candidate-runs/experts-cua-overlay-20261113T105329Z-r30/evidence/TERRA-R30-RESULT.json records a renderer command line containing --disable-features=NetworkServiceSandbox.
+- workdsh-ai-expert-candidate-runs/workdsh-real-ui-acceptance-20261114T023000Z-r61/evidence/TERRA-R61-RESULT.md records a visible WorkDSH Electron window under a sandbox/no-sandbox environment exception.
+
+Current reproduction:
+- App root: D:\project\codex\workdsh-ai-experts\apps\desktop
+- Electron: D:\project\codex\workdsh-ai-expert-candidate\apps\desktop\node_modules\electron\dist\electron.exe
+- Electron SHA-256: 31A0176B7C1A81CF379E55E109C57A56493A4D4A9E9B0D2475A678FD7DF234DC
+- First flags: --no-sandbox --disable-gpu
+- Observed stderr:
+  [FATAL] mojo\public\cpp\platform\platform_channel.cc:108 Check failed: . : access denied (0x5)
+  [ERROR] content\browser\network_sandbox.cc:393 Failed to grant sandbox access to Cache\Cache_Data: access denied (0x5)
+  [ERROR] content\browser\network_sandbox.cc:318 Failed to grant sandbox access to SharedDictionary: access denied (0x5)
+  [ERROR] content\browser\network_sandbox.cc:501 Failed to grant sandbox access to Network: access denied (0x5)
+
+Control change:
+- Added --disable-features=NetworkServiceSandbox before the App root while keeping the same Electron, App root, runtime and isolated user data.
+- The mojo/network_sandbox error group did not reappear and the Electron PID remained alive with a window handle.
+
+Interpretation:
+- --no-sandbox alone did not disable the Network Service sandbox path used by this Electron build.
+- The historical successful environment carried an additional Chromium feature flag. The old foreground error dialog remained a separate UI cleanup blocker.
+
+Controlled minimal matrix (2026-11-14 23:43):
+- A `--no-sandbox`: window handle created, but `network_sandbox.cc` and `platform_channel` access denied remained.
+- B `--no-sandbox --disable-features=NetworkServiceSandbox`: the same access-denied group remained.
+- Matrix receipt: `D:\project\codex\workdsh-ai-experts\.runs\electron-matrix-r61-20261114\MATRIX-RESULT.json`.
+- Current shell token: medium integrity; Administrators group deny-only; only `SeChangeNotifyPrivilege` enabled.
+- Conclusion: the feature flag is not the root cause. The unresolved difference is the Windows process token/launcher path and its ability to let Chromium grant ACLs to Network Service directories.
+- The historical r61 evidence records WinApp UIA observation, but does not preserve a complete launcher argv/token receipt; WinApp must not be assumed to have launched Electron.
+- Historical `workdsh`/candidate roots have protected standard DACLs; current `workdsh-ai-experts` and `.runs` inherit additional Codex sandbox SIDs. This ACL/inheritance difference is confirmed; whether it is sufficient to explain Chromium's broker failure remains unproven.
+- Historical r42 launcher receipt shows a normal Node wrapper spawning Electron; WinApp is listed only in later UIA observation commands. Do not attribute a different token to WinApp without a token receipt.
+- Final controlled comparison receipt: `D:\project\codex\workdsh-ai-experts\.runs\electron-matrix-r61-20261114\r42-standard-acl\COMPARISON-RESULT.json`.
+- Same Electron SHA-256 + same minimal page + same Node wrapper: standard protected DACL root stayed alive without the access-denied group; current `.runs` A/B cells both failed. DACL/inheritance is now the leading verified cause; token difference remains unproven.
