@@ -1,4 +1,4 @@
-import { resolve } from 'node:path'
+import { join, resolve } from 'node:path'
 import { describe, expect, it, vi } from 'vitest'
 import { releaseMac, type MacReleaseOptions } from '../scripts/release-mac.ts'
 
@@ -6,6 +6,8 @@ const DEVELOPER_ID_OUTPUT = `
   1) 0123456789ABCDEF "Developer ID Application: Mengxin Yang (TEAM123456)"
      1 valid identities found
 `
+
+const ELECTRON_BUILDER_CONFIG = `--config=${join('/repo/apps/desktop', 'scripts', 'electron-builder-config.mjs')}`
 
 interface CommandCall {
   readonly command: string
@@ -70,6 +72,7 @@ describe('macOS release command boundary', () => {
       command: 'yarn',
       args: [
         'exec', 'electron-builder', '--mac', 'dmg', '--arm64',
+        ELECTRON_BUILDER_CONFIG,
         '--config.forceCodeSigning=true', '--config.mac.notarize=true',
         '--config.npmRebuild=false',
         '--config.directories.output=/repo/apps/desktop/dist/mac-release',

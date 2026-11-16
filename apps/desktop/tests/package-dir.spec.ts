@@ -1,6 +1,9 @@
+import { fileURLToPath } from 'node:url'
 import { describe, expect, it, vi } from 'vitest'
 // @ts-expect-error package-dir deliberately remains a directly executable ESM script.
 import { packageDirectory, UNSIGNED_DIRECTORY_BUILD_ARGS, unsignedDirectoryBuildEnvironment } from '../scripts/package-dir.mjs'
+
+const ELECTRON_BUILDER_CONFIG = `--config=${fileURLToPath(new URL('../scripts/electron-builder-config.mjs', import.meta.url))}`
 
 describe('unsigned directory packaging', () => {
   it('removes release secrets while preserving ordinary build inputs', () => {
@@ -39,6 +42,7 @@ describe('unsigned directory packaging', () => {
       '--dir',
       '--publish',
       'never',
+      ELECTRON_BUILDER_CONFIG,
       '--config.forceCodeSigning=false',
       '--config.mac.identity=null',
       '--config.mac.notarize=false',

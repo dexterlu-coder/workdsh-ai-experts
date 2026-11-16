@@ -66,6 +66,7 @@ describe('Windows x64 installer packaging', () => {
         '--x64',
         '--publish',
         'never',
+        '--config=C:\\repo\\dsh-plugin-desktop\\scripts\\electron-builder-config.mjs',
         '--config.win.signExecutable=false',
         '--config.npmRebuild=false',
       ],
@@ -104,6 +105,7 @@ describe('Windows x64 installer packaging', () => {
       '--x64',
       '--publish',
       'never',
+      '--config=C:\\repo\\dsh-plugin-desktop\\scripts\\electron-builder-config.mjs',
       '--config.win.signExecutable=false',
       '--config.npmRebuild=false',
     ])
@@ -136,6 +138,7 @@ describe('Windows x64 installer packaging', () => {
       '--x64',
       '--publish',
       'never',
+      '--config=C:\\repo\\dsh-plugin-desktop\\scripts\\electron-builder-config.mjs',
       '--config.win.signExecutable=false',
       '--config.npmRebuild=false',
     ])

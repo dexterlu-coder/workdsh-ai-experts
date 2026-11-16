@@ -1,3 +1,4 @@
+import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import {
   packageMacSmoke,
@@ -10,6 +11,8 @@ interface CommandCall {
   readonly cwd: string
   readonly env: NodeJS.ProcessEnv
 }
+
+const ELECTRON_BUILDER_CONFIG = `--config=${join('/repo/dsh-plugin-desktop', 'scripts', 'electron-builder-config.mjs')}`
 
 function options(calls: CommandCall[], logs: string[] = []): MacSmokePackageOptions {
   return {
@@ -68,6 +71,7 @@ describe('macOS DMG smoke packaging', () => {
         '--arm64',
         '--publish',
         'never',
+        ELECTRON_BUILDER_CONFIG,
         '--config.mac.notarize=false',
         '--config.npmRebuild=false',
         '--config.directories.output=/repo/apps/desktop/dist/mac-smoke',
@@ -128,6 +132,7 @@ describe('macOS DMG smoke packaging', () => {
       '--arm64',
       '--publish',
       'never',
+      ELECTRON_BUILDER_CONFIG,
       '--config.mac.notarize=false',
       '--config.npmRebuild=false',
       '--config.directories.output=/repo/apps/desktop/dist/mac-smoke',
