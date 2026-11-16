@@ -145,6 +145,16 @@
 - 证据：[2026-11-16-controlled-reuse-ui-expert-acceptance.md](docs/2026-11-16-controlled-reuse-ui-expert-acceptance.md)。
 - 限定：本批次证明受控复用组合可用，不证明从干净源码全量构建的可复现性；正式发布另建 runId。
 
+## r88-r96 完整构建分支验收（2026-11-17）
+
+- 状态：`blocked / packaged-runtime-not-accepted`。
+- 分支：`codex/full-build-validation-20261116`；基线提交 `a945acb5e9`；当前验证提交 `53edba76ce`。
+- 已通过：immutable install、完整 `corepack yarn check`、Desktop/Web DSH 对齐、Desktop 构建、类型检查、166 个测试、Web release candidate 和 13 个 Desktop feature 包归档；专家归档仍为 8 个预置专家。
+- 未通过：标准 local release 在官方 Profile 安装阶段缺少 `@deepseek-ai/cordis@4.0.5` tarball。配置镜像网络不可用；切换官方 registry 因本机 npm 认证凭据被自动审查拒绝；离线缓存也无法补齐该 tarball。
+- 因此未宣称 packaged Desktop、Host、个人入口、主界面或专家入口验收；当前共享 runtime 在失败的 Profile 准备过程中不再完整，不能继续启动实验。
+- 详细报告：[2026-11-17-full-build-validation.md](docs/2026-11-17-full-build-validation.md)。
+- 回滚：验证分支可回到 `a945acb5e9`；`main` 未被修改、未推送验证分支、未创建发布标签。
+
 ## 规则维护批次：资源隔离与最小证据（2026-11-16）
 
 - 输入：Astra/high 只读审核、现有全局与项目 AGENTS.md、当前 DESIGN.md、PLAN.md 和历史打包经验。

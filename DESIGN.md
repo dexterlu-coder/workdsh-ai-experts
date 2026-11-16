@@ -64,6 +64,10 @@ r74 打包经验已归档到 [2026-11-15-r74-packaging-lessons.md](docs/2026-11-
 
 状态：`completed / controlled-reuse-ui-accepted`。本批次用于验证当前源码已经验收的品牌界面产物，与此前已验收的八个预置专家发布包能否在同一隔离个人运行中同时工作。复用已能启动的 Electron、官方 DSH `0.2.1-rc.5` runtime、Profile、Host 和当前自有 Bundle/UI，只覆盖 WorkDSH 自有专家包；不重建或修改官方 DSH runtime。实际窗口和无障碍树均确认“AI专家办事大厅”品牌、Host ready，以及 8 个预置专家加 3 个原始专家。证据见 [2026-11-16-controlled-reuse-ui-expert-acceptance.md](docs/2026-11-16-controlled-reuse-ui-expert-acceptance.md) 和 [.runs/r86-controlled-reuse-ui-experts-20261116-001/final-receipt.json](.runs/r86-controlled-reuse-ui-experts-20261116-001/final-receipt.json)。该结果是受控组合验收，不替代干净源码全量可复现构建。
 
+### 完整构建分支验收（2026-11-17）
+
+验证分支 `codex/full-build-validation-20261116` 已通过源码无头门禁和 Web/WorkDSH 自有归档生成；归档包含 8 个预置专家包和当前品牌 carrier。官方 Profile 安装需要的 `@deepseek-ai/cordis@4.0.5` tarball 不在本机可用缓存中，配置镜像网络失败，官方 registry 切换因本机认证凭据边界被自动审查拒绝。因此本批次保持 `blocked / packaged-runtime-not-accepted`，不把源码构建或归档成功写成 Desktop runtime/UI 成功。详细事实、runId 和回滚见 [2026-11-17-full-build-validation.md](docs/2026-11-17-full-build-validation.md)。
+
 
 ## 资源隔离与最小证据规则
 

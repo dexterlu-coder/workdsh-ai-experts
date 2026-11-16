@@ -40,6 +40,7 @@
 | [`2026-11-16-connection-entry-branding-astra-audit.md`](2026-11-16-connection-entry-branding-astra-audit.md) | 2026-11-16 | Astra/high 只读审核、范围决策 | 审核入口页静态品牌方案、共享 header 传播、CSP/协议/转义保持和源码 allowlist，结论为 approved-with-changes |
 | [`2026-11-16-connection-entry-branding-r84-ui-acceptance.md`](2026-11-16-connection-entry-branding-r84-ui-acceptance.md) | 2026-11-16 | 实验结果、源码事实、稳定验收证据 | 记录选择使用方式页、个人启动页、主界面回归、r83 失败换 run 和 r84 实际窗口验收 |
 | [`2026-11-16-controlled-reuse-ui-expert-acceptance.md`](2026-11-16-controlled-reuse-ui-expert-acceptance.md) | 2026-11-16 | 实验结果、源码事实、稳定验收证据 | r86 受控复用当前品牌 UI 产物与 r63 八专家发布包，在同一隔离个人运行中完成实际窗口和专家入口验收 |
+| [`2026-11-17-full-build-validation.md`](2026-11-17-full-build-validation.md) | 2026-11-17 | 完整构建门禁、发布归档、错误分诊 | 分支验证的 check、Web/WorkDSH 归档、Profile 依赖缓存阻塞、自动审查边界和 packaged-runtime 未验收事实 |
 
 ## 3. 启动与安装证据
 
