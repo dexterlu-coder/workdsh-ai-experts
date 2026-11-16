@@ -33,12 +33,13 @@ export async function ensureNativeWorkbenchFrame(profile,{rollback=false}={}){
  if(patched!==source)await replaceRuntimeFile(target,source,patched);
 }
 /** Read the installed artifact, rather than trusting a preparation receipt. */
-export async function verifyNativeWorkbenchFrame(profile){
+export async function verifyNativeWorkbenchFrame(profile,{acceptedPatchedSha256=[]}={}){
  const require=createRequire(join(profile,'package.json'));
  const path=require.resolve(`${spec.package}/package.json`),manifest=JSON.parse(await readFile(path,'utf8'));
  if(manifest.version!==spec.version)throw Error('Native workbench frame: runtime version mismatch');
  const target=join(dirname(path),spec.file),digest=hash(await readFile(target,'utf8'));
- if(digest!==spec.patchedSha256)throw Error(digest===spec.originalSha256
+ const accepted = [spec.patchedSha256, ...acceptedPatchedSha256].map(value => value.toLowerCase());
+ if(!accepted.includes(digest.toLowerCase()))throw Error(digest===spec.originalSha256
   ?'Native workbench frame: authorized adapter is missing from the packaged runtime'
   :'Native workbench frame: unsupported packaged runtime bytes');
  return {package:spec.package,version:spec.version,file:spec.file,sha256:digest};

@@ -19,6 +19,7 @@ export const UNSIGNED_DIRECTORY_BUILD_ARGS = Object.freeze([
   '--dir',
   '--publish',
   'never',
+  `--config=${fileURLToPath(new URL('./electron-builder-config.mjs', import.meta.url))}`,
   '--config.forceCodeSigning=false',
   '--config.mac.identity=null',
   '--config.mac.notarize=false',

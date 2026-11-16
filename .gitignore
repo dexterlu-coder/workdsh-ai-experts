@@ -19,6 +19,7 @@ dsh-community-market/lib/
 
 # Verified official binary release cache (generated, never source).
 apps/desktop/build/official-release-cache/
+apps/desktop/build/workdsh-display-*.json
 
 /apps/desktop/lib/
 /apps/desktop/dist/

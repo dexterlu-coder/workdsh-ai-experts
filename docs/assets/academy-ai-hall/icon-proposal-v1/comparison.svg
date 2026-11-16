@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="700" viewBox="0 0 1024 700"><rect width="1024" height="700" fill="#F5F7FA"/><g font-family="Microsoft YaHei, sans-serif"><text x="44" y="60" font-size="30" font-weight="bold" fill="#172B4D">培训学院 AI 大厅 · 图标候选</text><text x="44" y="94" font-size="17" fill="#536278">先确认图标方向，再进入软件替换。以下为开源图标与配色提案。</text><rect x="44" y="126" width="284" height="260" rx="20" fill="#FFFFFF" stroke="#DCE3ED"/><svg x="118" y="153" width="136" height="136" viewBox="0 0 24 24" fill="#2458A6">
+  <path d="M11.584 2.376a.75.75 0 0 1 .832 0l9 6a.75.75 0 1 1-.832 1.248L12 3.901 3.416 9.624a.75.75 0 0 1-.832-1.248l9-6Z"/>
+  <path fill-rule="evenodd" d="M20.25 10.332v9.918H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h.75v-9.918a.75.75 0 0 1 .634-.74A49.109 49.109 0 0 1 12 9c2.59 0 5.134.202 7.616.592a.75.75 0 0 1 .634.74Zm-7.5 2.418a.75.75 0 0 0-1.5 0v6.75a.75.75 0 0 0 1.5 0v-6.75Zm3-.75a.75.75 0 0 1 .75.75v6.75a.75.75 0 0 1-1.5 0v-6.75a.75.75 0 0 1 .75-.75ZM9 12.75a.75.75 0 0 0-1.5 0v6.75a.75.75 0 0 0 1.5 0v-6.75Z" clip-rule="evenodd"/>
+  <path d="M12 7.875a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z"/>
+</svg><text x="186" y="328" text-anchor="middle" font-size="22" fill="#172B4D">学院门廊 · 推荐</text><text x="186" y="359" text-anchor="middle" font-size="15" fill="#536278">heroicons · MIT</text><rect x="354" y="126" width="284" height="260" rx="20" fill="#FFFFFF" stroke="#DCE3ED"/><svg x="428" y="153" width="136" height="136" viewBox="0 0 24 24" fill="none" stroke="#2458A6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" />
+  <path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" />
+</svg><text x="496" y="328" text-anchor="middle" font-size="22" fill="#172B4D">学士帽</text><text x="496" y="359" text-anchor="middle" font-size="15" fill="#536278">tabler · MIT</text><rect x="664" y="126" width="284" height="260" rx="20" fill="#FFFFFF" stroke="#DCE3ED"/><svg x="738" y="153" width="136" height="136" viewBox="0 0 24 24" fill="none" stroke="#2458A6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M14 21v-3a2 2 0 0 0-4 0v3" />
+  <path d="M18 12h.01" />
+  <path d="M18 16h.01" />
+  <path d="M22 7a1 1 0 0 0-1-1h-2a2 2 0 0 1-1.143-.359L13.143 2.36a2 2 0 0 0-2.286-.001L6.143 5.64A2 2 0 0 1 5 6H3a1 1 0 0 0-1 1v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2z" />
+  <path d="M6 12h.01" />
+  <path d="M6 16h.01" />
+  <circle cx="12" cy="10" r="2" />
+</svg><text x="806" y="328" text-anchor="middle" font-size="22" fill="#172B4D">大学建筑</text><text x="806" y="359" text-anchor="middle" font-size="15" fill="#536278">lucide · ISC</text><text x="44" y="438" font-size="21" fill="#172B4D">推荐应用图标</text><svg x="44" y="462" width="160" height="160" viewBox="0 0 1024 1024"><title>培训学院 AI 大厅：学院门廊图标提案</title><rect x="24" y="24" width="976" height="976" rx="220" fill="#2458A6"/><svg x="162" y="130" width="700" height="700" viewBox="0 0 24 24" fill="#FFFFFF">
+  <path d="M11.584 2.376a.75.75 0 0 1 .832 0l9 6a.75.75 0 1 1-.832 1.248L12 3.901 3.416 9.624a.75.75 0 0 1-.832-1.248l9-6Z"/>
+  <path fill-rule="evenodd" d="M20.25 10.332v9.918H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h.75v-9.918a.75.75 0 0 1 .634-.74A49.109 49.109 0 0 1 12 9c2.59 0 5.134.202 7.616.592a.75.75 0 0 1 .634.74Zm-7.5 2.418a.75.75 0 0 0-1.5 0v6.75a.75.75 0 0 0 1.5 0v-6.75Zm3-.75a.75.75 0 0 1 .75.75v6.75a.75.75 0 0 1-1.5 0v-6.75a.75.75 0 0 1 .75-.75ZM9 12.75a.75.75 0 0 0-1.5 0v6.75a.75.75 0 0 0 1.5 0v-6.75Z" clip-rule="evenodd"/>
+  <path d="M12 7.875a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z"/>
+</svg><rect x="340" y="862" width="344" height="20" rx="10" fill="#D7AF5C"/></svg><text x="236" y="500" font-size="24" font-weight="bold" fill="#172B4D">学院蓝 + 白色门廊 + 暖金点缀</text><text x="236" y="539" font-size="18" fill="#536278">对应学院、知识与大厅入口；矢量源适合多尺寸输出。</text><text x="236" y="579" font-size="16" fill="#536278">已保留原始来源与许可证。候选素材尚未写入产品。</text><text x="44" y="666" font-size="15" fill="#536278">图形来源：Heroicons / Tabler Icons / Lucide　·　2026-11-07</text></g></svg>

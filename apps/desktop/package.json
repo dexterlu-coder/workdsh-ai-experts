@@ -29,22 +29,24 @@
     "node": "^22.19.0 || >=24.0.0"
   },
   "scripts": {
-    "build": "node scripts/generate-windows-app-icon.mjs && node scripts/generate-mac-app-icon.mjs && node scripts/generate-tray-icons.mjs && node scripts/clean.mjs && tsdown && tsc -p tsconfig.json --emitDeclarationOnly",
+    "build": "node scripts/generate-academy-brand-assets.mjs && node scripts/generate-windows-app-icon.mjs && node scripts/generate-mac-app-icon.mjs && node scripts/generate-tray-icons.mjs && node scripts/clean.mjs && tsdown && tsc -p tsconfig.json --emitDeclarationOnly",
     "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.tests.json --noEmit",
     "test": "vitest run && node --test scripts/verify-profile-release.test.mjs scripts/official-desktop-release.test.mjs",
     "check": "yarn run build && yarn run typecheck && yarn run test",
     "check:win-package": "yarn run check",
     "check:mac-package": "yarn run check",
     "start": "node scripts/start-workdsh.mjs",
-    "dev": "yarn run build && yarn run prepare:workdsh-runtime && yarn run prepare:workdsh-primary-runtime && yarn run prepare:workdsh-command && yarn run start",
-    "package:dir": "yarn run build && yarn run prepare:workdsh-runtime && yarn run prepare:workdsh-primary-runtime && yarn run prepare:workdsh-command && node scripts/package-dir.mjs",
-    "dist:mac": "yarn run prepare:workdsh-runtime && yarn run prepare:workdsh-primary-runtime && yarn run prepare:workdsh-command && node scripts/release-mac.ts",
-    "dist:mac-smoke": "yarn run prepare:workdsh-runtime && yarn run prepare:workdsh-primary-runtime && yarn run prepare:workdsh-command && node scripts/package-mac.ts",
-    "dist:win": "yarn run prepare:workdsh-runtime && yarn run prepare:workdsh-primary-runtime && yarn run prepare:workdsh-command && node scripts/package-win.ts",
-    "dist:win-portable": "yarn run prepare:workdsh-runtime && yarn run prepare:workdsh-primary-runtime && yarn run prepare:workdsh-command && node scripts/package-win-portable.ts",
+    "dev": "yarn run build && yarn run prepare:workdsh-runtime && yarn run prepare:workdsh-primary-runtime && yarn run prepare:workdsh-command && yarn run prepare:workdsh-display && yarn run prepare:workdsh-materialized && yarn run start",
+    "package:dir": "yarn run build && yarn run prepare:workdsh-runtime && yarn run prepare:workdsh-primary-runtime && yarn run prepare:workdsh-command && yarn run prepare:workdsh-display && yarn run prepare:workdsh-materialized && node scripts/package-dir.mjs",
+    "dist:mac": "yarn run prepare:workdsh-runtime && yarn run prepare:workdsh-primary-runtime && yarn run prepare:workdsh-command && yarn run prepare:workdsh-display && yarn run prepare:workdsh-materialized && node scripts/release-mac.ts",
+    "dist:mac-smoke": "yarn run prepare:workdsh-runtime && yarn run prepare:workdsh-primary-runtime && yarn run prepare:workdsh-command && yarn run prepare:workdsh-display && yarn run prepare:workdsh-materialized && node scripts/package-mac.ts",
+    "dist:win": "yarn run prepare:workdsh-runtime && yarn run prepare:workdsh-primary-runtime && yarn run prepare:workdsh-command && yarn run prepare:workdsh-display && yarn run prepare:workdsh-materialized && node scripts/package-win.ts",
+    "dist:win-portable": "yarn run prepare:workdsh-runtime && yarn run prepare:workdsh-primary-runtime && yarn run prepare:workdsh-command && yarn run prepare:workdsh-display && yarn run prepare:workdsh-materialized && node scripts/package-win-portable.ts",
     "prepare:workdsh-runtime": "node scripts/prepare-workdsh-runtime.mjs",
     "prepare:workdsh-primary-runtime": "node scripts/prepare-workdsh-primary-runtime.mjs",
-    "prepare:workdsh-command": "node scripts/prepare-workdsh-command.mjs"
+    "prepare:workdsh-command": "node scripts/prepare-workdsh-command.mjs",
+    "prepare:workdsh-display": "node scripts/prepare-workdsh-display-staging.mjs",
+    "prepare:workdsh-materialized": "node scripts/materialize-workdsh-display-runtime.mjs"
   },
   "peerDependencies": {
     "electron": "43.3.0"

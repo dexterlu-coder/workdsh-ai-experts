@@ -11,7 +11,7 @@ import type {} from '@deepseek-ai/dsh-client-ui-session/client';
 import type {} from '@deepseek-ai/dsh-api-session-controller/client';
 import type { ISessions } from '@deepseek-ai/dsh-api-session-controller/client';
 import * as workbench from 'workdsh-plugin-workbench';
-import { BrandMark, BrandName, DiagnosticsMark } from '../components/Brand.js';
+import { BrandMark, BrandName, DiagnosticsMark, HeroMark } from '../components/Brand.js';
 import { DiagnosticsPanel, type Inventory } from '../components/DiagnosticsPanel.js';
 import { NavigationLocation } from '../components/NavigationLocation.js';
 import { AgentBrowserPage, agentBrowserKind, readAgentBrowserFrame } from '../components/AgentBrowserPage.js';
@@ -152,6 +152,7 @@ export function apply(ctx: Context): void {
   ctx.plugin(workbench);
   ctx.slots.inject('sidebar.brand.name', () => ctx.slots.register({ name: 'sidebar.brand.name', priority: -10 }, BrandName));
   ctx.slots.inject('sidebar.brand.mark', () => ctx.slots.register({ name: 'sidebar.brand.mark', priority: -10 }, BrandMark));
+  ctx.slots.inject('conversation.hero.brand.mark', () => ctx.slots.register({ name: 'conversation.hero.brand.mark', priority: -10 }, HeroMark));
   ctx.slots.inject('shell.overlay', () => ctx.slots.register({
     name: 'shell.overlay', id: 'workdsh-location', inject: () => ({ panelToView, selectView }),
   }, NavigationLocation));

@@ -1,14 +1,20 @@
 import * as React from 'react';
-import { LogoMark } from 'workdsh-ui';
+import { academyBrand, LogoMark } from 'workdsh-ui';
 
-export function BrandName() {
-  return <span data-testid="workdsh-brand">WorkDSH</span>;
+type BrandSlotProps = { readonly className?: string };
+
+export function BrandName({ className }: BrandSlotProps) {
+  return <span className={className} data-testid="academy-brand">{academyBrand.name}</span>;
 }
 
-export function BrandMark() {
-  return <LogoMark size={22} />;
+export function BrandMark({ className }: BrandSlotProps) {
+  return <LogoMark className={className} size={22} title={academyBrand.name} />;
 }
 
-export function DiagnosticsMark() {
-  return <span aria-hidden>W</span>;
+export function DiagnosticsMark({ className }: BrandSlotProps) {
+  return <LogoMark className={className} size={22} title={academyBrand.name} />;
+}
+
+export function HeroMark({ size = 34, className }: BrandSlotProps & { readonly size?: number }) {
+  return <LogoMark className={className} size={size} title={academyBrand.name} />;
 }

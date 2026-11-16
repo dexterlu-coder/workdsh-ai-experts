@@ -3,7 +3,7 @@
 import { spawnSync } from 'node:child_process'
 import { existsSync, rmSync } from 'node:fs'
 import { createRequire } from 'node:module'
-import { dirname, resolve } from 'node:path'
+import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { withoutMacReleaseSecrets } from './release-preflight.ts'
 import { electronBuilderEnvironment } from './electron-builder-environment.ts'
@@ -132,6 +132,7 @@ export function packageMacSmoke(options: MacSmokePackageOptions = defaultOptions
       `--${targetArch}`,
       '--publish',
       'never',
+      `--config=${join(options.desktopRoot, 'scripts', 'electron-builder-config.mjs')}`,
       '--config.mac.notarize=false',
       '--config.npmRebuild=false',
       `--config.directories.output=${options.outputDir}`,

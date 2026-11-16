@@ -1,6 +1,6 @@
 # WorkDSH 调研、经验与证据总目录
 
-最后更新：2026-11-15 13:12（Asia/Shanghai）
+最后更新：2026-11-16（Asia/Shanghai）
 维护规则：本目录由 [`AGENTS.md`](../AGENTS.md) 约束；新增、改名或删除调研报告、经验笔记、架构决策和稳定证据时，必须在同一变更中更新本文件。
 
 本文件是“去哪里找结论”的总入口，不替代各报告正文，也不把 `.runs` 下的一次性原始回执复制进长期文档。每条记录尽量标明材料性质：**官方声明、项目设计、源码事实、实验结果、推测/待验证**。
@@ -29,6 +29,13 @@
 | [`2026-11-15-training-course-expert-pre-release.md`](2026-11-15-training-course-expert-pre-release.md) | 2026-11-15 | 实施回执、预发布验收 | 培训课程设计专家快照、当前源码接入、预发布包和测试边界 |
 | [`2026-11-15-eight-expert-integration.md`](2026-11-15-eight-expert-integration.md) | 2026-11-15 | 实施回执、构建/测试/UI 验收 | 8 个预制 Skill 专家整合、运行时清单、发布提交和人工验收入口 |
 | [`2026-11-15-remove-preview-onboarding.md`](2026-11-15-remove-preview-onboarding.md) | 2026-11-15 | 源码审计、范围登记、实施计划 | 官方首启预览说明的 owner、公开插槽抑制方案和验收/回滚边界 |
+| [`2026-11-15-historical-branding-investigation.md`](2026-11-15-historical-branding-investigation.md) | 2026-11-15 | 历史源码事实、官方补丁记录、真实 UI 实验结果 | 分别核对红/黄/蓝三个区域；原生窗口标题和侧栏曾有通过证据，动态网页标题和 Conversation Hero 仍失败 |
+| [`2026-11-15-ai-expert-branding-css-plan.md`](2026-11-15-ai-expert-branding-css-plan.md) / [`2026-11-15-ai-expert-branding-css-astra-audit.md`](2026-11-15-ai-expert-branding-css-astra-audit.md) | 2026-11-15 | 实施计划、Astra 审计 | CSS 隐藏官方 Hero 预览徽章；当前因 rc.5 selector、布局保持和 Hero 证据不足而 blocked |
+| [`2026-11-15-ai-expert-branding-css-plan-r73.md`](2026-11-15-ai-expert-branding-css-plan-r73.md) / [`2026-11-15-ai-expert-branding-css-astra-audit-r73.md`](2026-11-15-ai-expert-branding-css-astra-audit-r73.md) | 2026-11-15 | 修订计划、Astra 审计 | 固定 rc.5 Hero selector 和 Slot；CSS 隐藏方案获 `approved-with-changes`，等待 Terra preflight |
+| [r73 failure triage](../.runs/r73-ai-expert-branding-css-badge-20261115-001/failure-triage.md) | 2026-11-15 | Terra 错误分诊 | 官方运行时 node_modules 写入被自动审查拒绝；自有源码已写入，官方运行时未修改，Run 保持 blocked |
+| [`2026-11-15-r74-packaging-lessons.md`](2026-11-15-r74-packaging-lessons.md) | 2026-11-15 | 打包经验归档、错误分诊、架构结论 | 记录 staging/materialized、Junction、只读 pnpm vendor、receipt、图标色值、组合哈希和 packaged Node EPERM；明确当前先做轻量 UI 验证，正式打包后置 |
+| [`2026-11-16-resource-isolation-and-minimum-evidence.md`](2026-11-16-resource-isolation-and-minimum-evidence.md) | 2026-11-16 | Astra 只读架构审核、规则落盘决策 | 说明可变状态隔离、稳定输入复用、最小充分证据、长任务停手条件，以及全局规则与 DSH 项目适配的两层结构 |
+| [`2026-11-16-ai-expert-branding-r82-ui-acceptance.md`](2026-11-16-ai-expert-branding-r82-ui-acceptance.md) | 2026-11-16 | 实验结果、源码事实、稳定验收证据 | 记录当前源码 r82 个人模式的三处品牌、预览徽章、左上方“新会话”位置和运行时哈希验收 |
 
 ## 3. 启动与安装证据
 

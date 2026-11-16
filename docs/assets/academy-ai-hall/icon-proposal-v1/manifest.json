@@ -1,0 +1,64 @@
+{
+  "status": "proposal-not-installed",
+  "node": "v24.21.0",
+  "sharp": "0.35.3",
+  "source": "D:\\project\\codex\\DeepSeek harness usage\\references\\academy-ai-hall\\academy-icons-20261107T082133",
+  "files": [
+    {
+      "file": "academy-hall-1024.png",
+      "sha256": "eb551d9f8f06b3ec80be0df015db9c94a92ac42c36943b048aa4094d4dc6de0f"
+    },
+    {
+      "file": "academy-hall-256.png",
+      "sha256": "75b4c741abb3abb8acb48ee14ed343e1a2439a796326603c890dfc83012da7ef"
+    },
+    {
+      "file": "academy-hall-128.png",
+      "sha256": "89b28158feda03c0f66ddff9be3e41c39939a377bd9efb7e061ffe083be7de19"
+    },
+    {
+      "file": "academy-hall-64.png",
+      "sha256": "ec28fd5a7d9e3223ead971597a2d789e2758627127476539666b5b47a08a210f"
+    },
+    {
+      "file": "academy-hall-48.png",
+      "sha256": "4a53a7eb6a88e44c5553666f054523d433e855d36d851919a72304fb50dee6b9"
+    },
+    {
+      "file": "academy-hall-32.png",
+      "sha256": "b3707b49ac41a0b030e98514f176ffba0e32ede50c5b0cd528c0ba5b3509b07a"
+    },
+    {
+      "file": "academy-hall-24.png",
+      "sha256": "494554c337888f059620187087dddadf39f591fc8b06549efe0c3a591416a4aa"
+    },
+    {
+      "file": "academy-hall-20.png",
+      "sha256": "aa03533e05258680c8e90dc3a7d58b6ae25e7bccfa2ff17e9c98580cef48e9e7"
+    },
+    {
+      "file": "academy-hall-16.png",
+      "sha256": "daa4f6fc645b6c5dd50e94dc8fda1c73b92638626679e2068f6de072af895ce6"
+    },
+    {
+      "file": "mark-blue.svg",
+      "sha256": "a78f2b4d1a7b576e12a6bf0afb86108c2f65d671cea32e005cf83119f654d757"
+    },
+    {
+      "file": "mark-white.svg",
+      "sha256": "7e183745401e653273b23933a6f771e49f999549f90dc95ebcf3b4a6a1f7449e"
+    },
+    {
+      "file": "comparison.svg",
+      "sha256": "cb1b1f1c32f73e3b30249d9ac01b25c44b57f241117310a8ee0ff10acb943d0f"
+    },
+    {
+      "file": "comparison.png",
+      "sha256": "b9b145d7235813e87877f8aa98a8cdb3ceb26caad2b7fd6ee916ce6d22f9b1a8"
+    },
+    {
+      "file": "academy-hall.svg",
+      "sha256": "ba45aa06e36b357f0a92ca74498ff93267b12ed7b454b704ee649a0dd0f0c0df"
+    }
+  ]
+}

@@ -126,7 +126,7 @@ function openWindow(url: string, connection: DesktopConnection = { mode: 'person
     ...(previous && typeof previous.getBounds === 'function' ? previous.getBounds() : {}),
     minWidth: 960,
     minHeight: 640,
-    title: 'WorkDSH',
+    title: 'AI专家办事大厅',
     icon,
     backgroundColor: '#111113',
     show: false,
@@ -142,7 +142,7 @@ function openWindow(url: string, connection: DesktopConnection = { mode: 'person
   entrySurface = carrier
   window.on('page-title-updated', event => {
     event.preventDefault()
-    page.setTitle('WorkDSH')
+    page.setTitle('AI专家办事大厅')
   })
   if (connection.mode === 'enterprise') enterpriseWindows.add(page)
   window.webContents.setWindowOpenHandler(({ url: target }) => {
@@ -486,7 +486,7 @@ if (desktopUserData) {
   if (!isAbsolute(desktopUserData)) throw new Error('Desktop user data override must be absolute')
   app.setPath('userData', desktopUserData)
 }
-app.setName('WorkDSH')
+app.setName('AI专家办事大厅')
 if (!app.requestSingleInstanceLock()) {
   app.quit()
 } else {

@@ -60,6 +60,54 @@
 - 回滚：移除 WorkDSH 自有的 slot suppression 代码并恢复本批次前的 bundle 构建产物；官方包、用户配置和现有专家快照不变。
 - 实施结果：提交 `236bf76f4f106db1c373f6562d8de87d7264f783` 已通过 Bundle 类型检查和构建；r70 干净个人 Home 进入主界面，未显示该弹窗，Host 在 `127.0.0.1:3080` 监听，专家入口显示 11 个（8 个预制专家 + 3 个原始专家）。详见 [2026-11-15-remove-preview-onboarding.md](docs/2026-11-15-remove-preview-onboarding.md) 和 [.runs/r70-remove-preview-onboarding-fresh-home-20261115-001/final-receipt.json](.runs/r70-remove-preview-onboarding-fresh-home-20261115-001/final-receipt.json)。
 
+## 当前品牌替换批次
+
+- `r71-ai-expert-branding-20261115-001`：目标文字已锁定为“AI专家办事大厅”；学院图标提案资源已复制并逐文件校验；尚未修改产品源码或生成图标。
+- 计划：[2026-11-15-ai-expert-branding-plan.md](docs/2026-11-15-ai-expert-branding-plan.md)。
+- 输入快照：[.runs/r71-ai-expert-branding-20261115-001/input-snapshot.json](.runs/r71-ai-expert-branding-20261115-001/input-snapshot.json)。
+- 当前状态：`blocked / astra-rejected`。审计回执：[2026-11-15-ai-expert-branding-astra-audit.md](docs/2026-11-15-ai-expert-branding-astra-audit.md)。必须修订计划并使用新的 `runId`、`reviewId` 和输入快照后重新审计，当前不得进入 Terra 首写。
+- 历史结果调查：[2026-11-15-historical-branding-investigation.md](docs/2026-11-15-historical-branding-investigation.md)。该调查按区域分别确认：原生窗口标题和侧栏有通过证据，动态网页标题与 Conversation Hero 仍失败。
+- r72 CSS 隐藏徽章计划：[2026-11-15-ai-expert-branding-css-plan.md](docs/2026-11-15-ai-expert-branding-css-plan.md)；Astra 回执：[2026-11-15-ai-expert-branding-css-astra-audit.md](docs/2026-11-15-ai-expert-branding-css-astra-audit.md)。当前 `rejected / blocked`，不能进入 Terra。
+- r73 修订计划：[2026-11-15-ai-expert-branding-css-plan-r73.md](docs/2026-11-15-ai-expert-branding-css-plan-r73.md)；Astra 回执：[2026-11-15-ai-expert-branding-css-astra-audit-r73.md](docs/2026-11-15-ai-expert-branding-css-astra-audit-r73.md)。Astra 为 `approved-with-changes`，但 Terra 官方运行时写入被自动审查拒绝，当前 `blocked`；分诊：[.runs/r73-ai-expert-branding-css-badge-20261115-001/failure-triage.md](.runs/r73-ai-expert-branding-css-badge-20261115-001/failure-triage.md)。
+
+### r74 固定 rc.5 staging 显示补丁
+
+- 用户已授权：采用最小范围的受控 staging 补丁；不修改官方源包或共享 `build/workdsh-runtime`。
+- 计划：[2026-11-15-ai-expert-branding-staging-plan-r74.md](docs/2026-11-15-ai-expert-branding-staging-plan-r74.md)。
+- 当前状态：`blocked / ui-mojo-acl`；receipt 与 materialized runtime 验收已通过，轻量 Electron UI 启动在仓库 `.runs` 和独立 Temp user-data 两次均被 Windows `mojo/platform_channel` ACL 拒绝。完整打包后置，不把 packaged Node EPERM 或 UI ACL 失败写成品牌逻辑失败。
+- 范围：固定 rc.5 的 `productTitle` 与 `hero.headline` 两个静态显示字段；自有 Bundle/UI 继续负责品牌图标和徽章 CSS。
+- staging：`.runs/r74-<runId>/staging/workdsh-runtime` 唯一路径；打包入口通过临时 electron-builder config 使用该路径，`to` 仍为 `workdsh-runtime`。
+- 门禁：结构 manifest 只允许两个登记的 `lib/client.js` 差异；非目标文件优先保持相同 dev+ino，只有登记的 `EPERM+nlink>1` vendor fallback 可为独立 inode；源内 Junction 必须映射到 staging 内目标，目标文件必须独立 inode 且通过完整 SHA；打包后 realpath 必须落在资源目录内；验收连接页仍独立；安装/移除插件与重启后的补丁持久性必须实际检查。
+- 包门禁：materialized runtime 必须无 symlink/Junction；Electron Builder 只从 materialized runtime 读取，打包后 reparse/realpath 检查仍保留。
+
+### r74 轻量 UI 验收回执
+
+- run：[`.runs/r74-ui-verification-20261115-001/pre-snapshot.json`](.runs/r74-ui-verification-20261115-001/pre-snapshot.json)。
+- 已通过：staging receipt、materialized receipt、261381 文件 regular-tree manifest、目标 occurrence SHA/bytes、无 reparse 结构。
+- 未通过：Electron 初始化阶段 `mojo/platform_channel.cc:108` 返回 Windows `拒绝访问 (0x5)`；独立 Temp user-data/`DSH_HOME` 未改变现象；未获得 WorkDSH 窗口，不能宣称 UI 验收完成。
+- 原始分诊：[failure-triage-ui-mojo-acl.json](.runs/r74-ui-verification-20261115-001/failure-triage-ui-mojo-acl.json)。后续若处理启动，必须新建启动诊断 run，复用历史标准受保护 DACL 基线。
+- 性能分诊：完整 970 MB/41822 文件逐项 SHA 在 Windows 上连续三次超过 5–10 分钟未完成，已停止；不得在旧 run 原地重试。新审计计划采用同卷硬链接闭包和目标文件 SHA。
+
+### r74 打包经验与当前轻量验收
+
+- 经验归档：[2026-11-15-r74-packaging-lessons.md](docs/2026-11-15-r74-packaging-lessons.md)。该文档汇总 r74-001 至 r74-009、materialized v9/v10、Junction 闭包、只读 pnpm vendor、receipt digest、tray 色值、组合哈希和 packaged Node EPERM。
+- 当前用户目标：先验证显示修改，不进入正式发布打包。验收顺序为 receipt/目标哈希 → materialized 无 reparse → Electron 启动 → UI 检查；正式打包/安装包另建发布批次。
+- 当前输入：materialized receipt：[`.runs/r74-package-materialization-v10-20261115-001/materialized-receipt.json`](.runs/r74-package-materialization-v10-20261115-001/materialized-receipt.json)；打包尝试未被宣称通过，v10 packaged Node EPERM 分诊已归档。
+
+## r81 当前源码品牌 UI 验证计划（2026-11-16）
+
+- 状态：`completed / current-source-ui-accepted`；当前源码构建和实际窗口验收已完成。
+- 目标：从当前源码重新生成并验证黄色框原生窗口标题/图标、蓝色框侧栏标题/图标、红色框 Conversation Hero 标题/图标；使用 CSS 隐藏红色框“预览版”徽章。
+- 固定文字：三个区域统一显示 **“AI专家办事大厅”**。图标使用已复制并登记的项目资源。
+- 第一阶段：静态定位每个区域的源码 owner、字段、资源、构建入口和运行时产物；对比源码、dist、Profile 和运行时哈希，解释 r80 显示旧品牌的传播断点。
+- 第二阶段：只修改项目自有品牌字段、图标资源和徽章 CSS；通过项目标准构建生成必要产物。禁止修改官方 DSH 源码、官方运行时字节、Conversation 布局/交互、Composer、右侧面板、Host、Agent、模型调用和会话存储。
+- 第三阶段：已新建干净 UI run，复用已校验 Electron 和稳定运行时，只隔离 user-data、DSH_HOME、DSH_AGENTS_HOME、临时目录、日志、端口和进程；没有复制整个运行时，也没有把正式安装包作为前置条件。
+- 验收矩阵：Electron 窗口标题和图标正确；侧栏标题和图标正确；Hero 标题和图标正确；预览徽章不可见；布局尺寸和位置未变化；主界面、Host、Conversation、专家/技能/连接器入口仍可用。每项保存截图/AX 观察、版本、哈希、退出码和进程状态。
+- 失败处理：发现旧产物、版本/哈希/路径偏差、进程残留或新的根因时停止当前 run，保留失败输出并新建 run；不得在同一 run 上盲目重试。
+- 进入条件：先完成本计划的静态定位和输入快照；代码首写前按标准实施流程取得 Astra/high 只读审核结论，再按结论进入后续实施。
+- 回滚：恢复本批次自有源码、资源和生成产物到 pre-snapshot；官方运行时、用户数据、历史 r74 证据和已有专家资产保持不变。
+- 实施回执：[2026-11-16-ai-expert-branding-r82-ui-acceptance.md](docs/2026-11-16-ai-expert-branding-r82-ui-acceptance.md)。窗口实际观察到三处品牌、预览徽章和左上方“新会话”位置均符合目标。
+
 ## 证据
 
 - 启动经验固化与门禁：[docs/2026-11-15-startup-history-gate.md](docs/2026-11-15-startup-history-gate.md)
@@ -73,3 +121,11 @@
 本批次没有产品源码或运行时改动。若清理实验材料，只删除 `.runs` 下本批次副本；长期分析与证据索引保留。
 
 本次新增的源码改动属于当前源码启动所需修复，不回滚。运行时副本改动只位于 `.runs/r50-current-runtime`；恢复旧运行时可使用 `.runs/r50-current-source-ui/before-workdsh-ui` 和 `.runs/r50-current-source/before-installed` 备份。
+
+
+## 规则维护批次：资源隔离与最小证据（2026-11-16）
+
+- 输入：Astra/high 只读审核、现有全局与项目 AGENTS.md、当前 DESIGN.md、PLAN.md 和历史打包经验。
+- 实施：在上级全局规则新增通用子节；在本项目规则新增 DSH 适配节；新增稳定报告并登记到 docs/RESEARCH_INDEX.md。
+- 验收：全局规则只包含跨项目原则；项目规则只包含 DSH 状态、路径和验收适配；历史命令、日志、哈希和负证据仍留在 docs/ 与 .runs/；现有源码改动未被覆盖。
+- 回滚：删除本批次新增的全局子节、项目适配节、报告和索引行；不回滚本批次之前的源码、计划或历史证据。

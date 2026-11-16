@@ -152,6 +152,7 @@ export function packageWindowsArtifact(
       '--x64',
       '--publish',
       'never',
+      `--config=${join(options.desktopRoot, 'scripts', 'electron-builder-config.mjs')}`,
       '--config.win.signExecutable=false',
       '--config.npmRebuild=false',
     ],

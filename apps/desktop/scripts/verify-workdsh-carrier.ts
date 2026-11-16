@@ -10,6 +10,8 @@ import { verifyBuiltPackageExports, verifyDefaultComposition, verifyDefaultProfi
 import { parseDeploymentConfig } from '../src/deployment-config.ts'
 import { verifyNativeWorkbenchFrame } from '../../../scripts/native-workbench-frame-patch.mjs'
 import {verifyOfficialRuntimeProvenance} from './official-runtime-provenance.mjs'
+import { verifyWorkdshDisplayRuntime } from './verify-workdsh-display-runtime.mjs'
+import { DISPLAY_PATCHES } from './display-patch-spec.mjs'
 
 interface PackContext {
   appOutDir: string
@@ -78,7 +80,8 @@ export async function afterPack(context: PackContext): Promise<void> {
   const profile = join(runtime, 'profiles', 'workdsh')
   // Inspect copied Resources bytes: a preparation log or receipt cannot prove
   // that the official Conversation frame actually reached this installer.
-  await verifyNativeWorkbenchFrame(profile)
+  await verifyNativeWorkbenchFrame(profile, { acceptedPatchedSha256: [DISPLAY_PATCHES.find(patch => patch.id === 'conversation-hero-headline')?.patchedSha256 ?? ''] })
+  verifyWorkdshDisplayRuntime(runtime)
   const cache = join(runtime, 'package-cache')
   const release = JSON.parse(readFileSync(join(cache, 'release-manifest.json'), 'utf8')) as {
     packages: Array<{ name: string; version: string; filename: string; sha256: string }>

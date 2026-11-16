@@ -2,7 +2,7 @@
 
 import { spawnSync } from 'node:child_process'
 import { rmSync } from 'node:fs'
-import { dirname, resolve } from 'node:path'
+import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   adaptMacReleaseEnvironment,
@@ -99,6 +99,7 @@ export function releaseMac(options: MacReleaseOptions = defaultReleaseOptions())
   options.resetOutput()
   options.run('yarn', [
     'exec', 'electron-builder', '--mac', 'dmg', `--${targetArch}`,
+    `--config=${join(options.desktopRoot, 'scripts', 'electron-builder-config.mjs')}`,
     '--config.forceCodeSigning=true', '--config.mac.notarize=true',
     '--config.npmRebuild=false',
     `--config.directories.output=${options.outputDir}`,
