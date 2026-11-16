@@ -36,6 +36,10 @@
 | [`2026-11-15-r74-packaging-lessons.md`](2026-11-15-r74-packaging-lessons.md) | 2026-11-15 | 打包经验归档、错误分诊、架构结论 | 记录 staging/materialized、Junction、只读 pnpm vendor、receipt、图标色值、组合哈希和 packaged Node EPERM；明确当前先做轻量 UI 验证，正式打包后置 |
 | [`2026-11-16-resource-isolation-and-minimum-evidence.md`](2026-11-16-resource-isolation-and-minimum-evidence.md) | 2026-11-16 | Astra 只读架构审核、规则落盘决策 | 说明可变状态隔离、稳定输入复用、最小充分证据、长任务停手条件，以及全局规则与 DSH 项目适配的两层结构 |
 | [`2026-11-16-ai-expert-branding-r82-ui-acceptance.md`](2026-11-16-ai-expert-branding-r82-ui-acceptance.md) | 2026-11-16 | 实验结果、源码事实、稳定验收证据 | 记录当前源码 r82 个人模式的三处品牌、预览徽章、左上方“新会话”位置和运行时哈希验收 |
+| [`2026-11-16-connection-entry-branding-plan.md`](2026-11-16-connection-entry-branding-plan.md) | 2026-11-16 | 项目设计、源码事实、实施计划 | 登记 Desktop 选择使用方式页和个人启动页的品牌 owner、allowlist、禁止范围、验收与回滚 |
+| [`2026-11-16-connection-entry-branding-astra-audit.md`](2026-11-16-connection-entry-branding-astra-audit.md) | 2026-11-16 | Astra/high 只读审核、范围决策 | 审核入口页静态品牌方案、共享 header 传播、CSP/协议/转义保持和源码 allowlist，结论为 approved-with-changes |
+| [`2026-11-16-connection-entry-branding-r84-ui-acceptance.md`](2026-11-16-connection-entry-branding-r84-ui-acceptance.md) | 2026-11-16 | 实验结果、源码事实、稳定验收证据 | 记录选择使用方式页、个人启动页、主界面回归、r83 失败换 run 和 r84 实际窗口验收 |
+| [`2026-11-16-controlled-reuse-ui-expert-acceptance.md`](2026-11-16-controlled-reuse-ui-expert-acceptance.md) | 2026-11-16 | 实验结果、源码事实、稳定验收证据 | r86 受控复用当前品牌 UI 产物与 r63 八专家发布包，在同一隔离个人运行中完成实际窗口和专家入口验收 |
 
 ## 3. 启动与安装证据
 

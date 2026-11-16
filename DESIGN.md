@@ -52,6 +52,18 @@ r74 打包经验已归档到 [2026-11-15-r74-packaging-lessons.md](docs/2026-11-
 
 实际验收：窗口原生标题/图标、左侧栏品牌、Hero 品牌和徽章状态均符合目标；左上方“新会话”按钮位置保持不变。证据、版本、哈希和运行根目录见 [2026-11-16-ai-expert-branding-r82-ui-acceptance.md](docs/2026-11-16-ai-expert-branding-r82-ui-acceptance.md)。
 
+### r83 Desktop 入口页面品牌批次（规划）
+
+状态：`completed / current-source-ui-accepted`。用户新增要求：选择使用方式页面和正在启动个人工作区页面内部的标题、图标也统一为 **“AI专家办事大厅”**。Astra/high 已完成只读审核，结论为 `approved-with-changes`；源码 owner、范围、验收和回滚见 [2026-11-16-connection-entry-branding-plan.md](docs/2026-11-16-connection-entry-branding-plan.md)，实际验收见 [2026-11-16-connection-entry-branding-r84-ui-acceptance.md](docs/2026-11-16-connection-entry-branding-r84-ui-acceptance.md)。
+
+本批次只修改 Desktop carrier 自有的 `connection-entry.ts` 静态 HTML 和对应测试，不改变入口协议、按钮/表单、CSP、转义、加载动画、布局、Host、Agent、模型或会话存储；官方 DSH runtime 和 Electron 保持不变。共享 header 会同步更新企业登录页和企业启动等待页的静态品牌，以消除同一 carrier 模板的漂移；这是已登记的品牌传播，不改变企业登录语义。Desktop `lib`、派生图标和运行目录只作证据，不进入源码 allowlist。
+
+实际窗口验收已通过：选择使用方式页、个人启动页和随后主界面均可见，证据见上述 r84 报告。
+
+### r86 受控复用验收批次
+
+状态：`completed / controlled-reuse-ui-accepted`。本批次用于验证当前源码已经验收的品牌界面产物，与此前已验收的八个预置专家发布包能否在同一隔离个人运行中同时工作。复用已能启动的 Electron、官方 DSH `0.2.1-rc.5` runtime、Profile、Host 和当前自有 Bundle/UI，只覆盖 WorkDSH 自有专家包；不重建或修改官方 DSH runtime。实际窗口和无障碍树均确认“AI专家办事大厅”品牌、Host ready，以及 8 个预置专家加 3 个原始专家。证据见 [2026-11-16-controlled-reuse-ui-expert-acceptance.md](docs/2026-11-16-controlled-reuse-ui-expert-acceptance.md) 和 [.runs/r86-controlled-reuse-ui-experts-20261116-001/final-receipt.json](.runs/r86-controlled-reuse-ui-experts-20261116-001/final-receipt.json)。该结果是受控组合验收，不替代干净源码全量可复现构建。
+
 
 ## 资源隔离与最小证据规则
 

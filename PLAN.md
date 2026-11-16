@@ -108,6 +108,18 @@
 - 回滚：恢复本批次自有源码、资源和生成产物到 pre-snapshot；官方运行时、用户数据、历史 r74 证据和已有专家资产保持不变。
 - 实施回执：[2026-11-16-ai-expert-branding-r82-ui-acceptance.md](docs/2026-11-16-ai-expert-branding-r82-ui-acceptance.md)。窗口实际观察到三处品牌、预览徽章和左上方“新会话”位置均符合目标。
 
+## r83 Desktop 入口页面品牌计划（2026-11-16）
+
+- 状态：`completed / current-source-ui-accepted`。
+- 目标：修改选择使用方式页面和正在启动个人工作区页面内部的页面标题、品牌文字和学院建筑图标；固定文字为“AI专家办事大厅”。
+- 计划与 allowlist：[2026-11-16-connection-entry-branding-plan.md](docs/2026-11-16-connection-entry-branding-plan.md)。
+- 源码 owner：`apps/desktop/src/connection-entry.ts`；调用路径为 `workdsh-main.ts` 的 entry/personal loading 分支；现有测试为 `apps/desktop/tests/connection-entry.spec.ts`。
+- 禁止范围：官方 DSH runtime、Electron、Host/Agent/模型/会话逻辑、入口协议、表单/CSP/转义/布局和用户数据。
+- 进入条件：完成 Astra/high 只读审核并生成新的 `runId`、输入哈希和 pre-snapshot；在审核完成前不写源码。
+- Astra/high 审计：`approved-with-changes`；回执：[2026-11-16-connection-entry-branding-astra-audit.md](docs/2026-11-16-connection-entry-branding-astra-audit.md)。共享 header 同步企业登录/企业启动页的静态品牌已登记为有意范围，`apps/desktop/lib/`、派生图标和临时 UI run 只作证据，不纳入源码 allowlist。
+- 验收：静态测试、类型检查和两个入口状态的实际窗口截图；回滚只恢复本批次自有 HTML/测试和文档。
+- 实施回执：[2026-11-16-connection-entry-branding-r84-ui-acceptance.md](docs/2026-11-16-connection-entry-branding-r84-ui-acceptance.md)。r84 选择页、个人启动页和随后主界面均通过实际窗口验收；r83 首次失败已按分诊规则换 runId 并保留负证据。
+
 ## 证据
 
 - 启动经验固化与门禁：[docs/2026-11-15-startup-history-gate.md](docs/2026-11-15-startup-history-gate.md)
@@ -122,6 +134,16 @@
 
 本次新增的源码改动属于当前源码启动所需修复，不回滚。运行时副本改动只位于 `.runs/r50-current-runtime`；恢复旧运行时可使用 `.runs/r50-current-source-ui/before-workdsh-ui` 和 `.runs/r50-current-source/before-installed` 备份。
 
+
+## r86 受控复用 UI + 八专家验收（2026-11-16）
+
+- 状态：`completed / controlled-reuse-ui-accepted`。
+- 目标：在同一隔离个人运行中同时验收当前源码的品牌 UI 产物和 r63 已验收的八个预置专家。
+- 方案：复用已能启动的 Electron、官方 DSH `0.2.1-rc.5` runtime、Profile、Host 和当前自有 Bundle/UI；仅替换运行时对应的 WorkDSH 自有 `workdsh-plugin-experts` 包；不进行官方运行时全量重建。
+- 运行目录：`D:\project\codex\workdsh\r86-controlled-reuse-ui-experts-20261116-001`，隔离 `DSH_HOME`、`DSH_AGENTS_HOME`、Desktop user-data、临时目录、AppData、日志和进程。
+- 验收：窗口标题和侧栏品牌为“AI专家办事大厅”；Host ready；专家入口显示 8 个预置专家加 3 个原始专家；端口 3080 可用；launcher 和 Electron 仍存活。
+- 证据：[2026-11-16-controlled-reuse-ui-expert-acceptance.md](docs/2026-11-16-controlled-reuse-ui-expert-acceptance.md)。
+- 限定：本批次证明受控复用组合可用，不证明从干净源码全量构建的可复现性；正式发布另建 runId。
 
 ## 规则维护批次：资源隔离与最小证据（2026-11-16）
 
