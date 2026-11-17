@@ -1,5 +1,11 @@
 # WorkDSH Desktop 启动诊断计划与回执
 
+新增只读调查（2026-11-17）：r110 已完成[原始基线平台比较](docs/2026-11-17-original-baseline-platform-comparison.md)，基线 ZIP 关联 `e94c99d5f9e143fb67fec84a74978eb8218daf32`。仅写比较证据与文档，未改产品代码。跨平台修复原方案需据新发现修订范围和审计后实施，仍为 proposed。
+
+本轮报告请求已汇总为 [构建全过程报告](docs/2026-11-17-build-process-report.md)（2026-11-17，r88—r109），包含流程、问题、处理、效率复盘和未完成验收；本次仅整理文档，不重启或修改已运行应用。
+
+当前有效状态（2026-11-17）：`source-build-and-staging-ui-accepted / awaiting-user-review`。源码及自有包已构建，官方 Profile 重新安装通过，r109 完整检查通过，r108 的品牌主界面及 8 个新增专家已由子代理和主代理分别实际核对。Electron PID 3504、Host 子进程和 3080 端口在最终回执中存活。窗口保留供用户审核；实际证据见 [r108 报告](docs/2026-11-17-current-source-startup-r108.md)。r107 打包物化副线经过时间必要性复核后主动停止，进程退出且不完整输出保留；尚未完成的安装包验收单独登记在 [后续计划](docs/2026-11-17-packaged-validation-handoff.md)，等待用户决定是否启动，不称为已通过。
+
 状态：`completed-with-current-source-launch`
 
 本文件与 [DESIGN.md](DESIGN.md) 互相引用。该批次只做启动差异诊断、证据归档和当前原始版本启动验证。
@@ -122,6 +128,9 @@
 
 ## 证据
 
+- r113 审核 / r114 main 合并批次：[冻结工作包](docs/2026-11-17-main-merge-plan.md)。Astra/high 为 approved-with-changes；文档登记导致旧快照变化已按意见换 r114 重新冻结。用户授权合并当前分支；仅补必要测试适配并提交稳定源码/文档，通过 PR 和适用必需门禁合并；不发产品、不改 CI、不重构平台策略、不碰当前窗口。状态及范围以该工作包为准。
+- r112 当前平台调查：[契约对照](docs/2026-11-17-current-platform-contract-comparison.md)、[Windows 地图](docs/2026-11-17-current-windows-packaging-map.md)。范围：原版/当前 75 路径哈希和必要 diff、有限只读路径观察及文档；allowlist 仅两份新报告、兼容提案、总目录、DESIGN/PLAN 和 `.runs/r112-current-platform-contract-audit-20261117-001/`；禁止产品/运行时修改、构建/GUI/依赖安装、提交推送发布。验收：来源与输入哈希、P01—P20 对照、路径观察、链接及产品输入未变；回滚只撤销本轮文档增量，保留之前 dirty 状态。状态：`research-complete / adaptation-design-not-frozen`。
+- 原版三平台契约基线：[2026-11-17-original-three-platform-baseline.md](docs/2026-11-17-original-three-platform-baseline.md)；r111 为只读源码调查与文档交付，57 个节选文件与 e94c99d5 匹配，不运行构建或改动当前应用。allowlist 为该报告、`references/original-platform-baseline-e94c99d5/`、总目录、DESIGN/PLAN 及 r111 回执；禁止产品/官方源码、运行时、锁文件、构建配置、GUI/进程、Git 推送或发布变更。验收为来源/源文件哈希、引用链接及边界核对；回滚只移除本轮新增材料和入口，保留 pre-documentation 中既有 dirty 内容。状态：`research-complete / no-product-change`。
 - 启动经验固化与门禁：[docs/2026-11-15-startup-history-gate.md](docs/2026-11-15-startup-history-gate.md)
 - [COMPARISON-RESULT.json](.runs/electron-matrix-r61-20261114/r42-standard-acl/COMPARISON-RESULT.json)
 - [MATRIX-RESULT.json](.runs/electron-matrix-r61-20261114/MATRIX-RESULT.json)
@@ -145,9 +154,32 @@
 - 证据：[2026-11-16-controlled-reuse-ui-expert-acceptance.md](docs/2026-11-16-controlled-reuse-ui-expert-acceptance.md)。
 - 限定：本批次证明受控复用组合可用，不证明从干净源码全量构建的可复现性；正式发布另建 runId。
 
+## r88-r96 完整构建分支验收（2026-11-17）
+
+- 状态：`blocked / packaged-runtime-not-accepted`。
+- 分支：`codex/full-build-validation-20261116`；基线提交 `a945acb5e9`；当前验证提交 `53edba76ce`。
+- 已通过：immutable install、完整 `corepack yarn check`、Desktop/Web DSH 对齐、Desktop 构建、类型检查、166 个测试、Web release candidate 和 13 个 Desktop feature 包归档；专家归档仍为 8 个预置专家。
+- 未通过：标准 local release 在官方 Profile 安装阶段缺少 `@deepseek-ai/cordis@4.0.5` tarball。配置镜像网络不可用；切换官方 registry 因本机 npm 认证凭据被自动审查拒绝；离线缓存也无法补齐该 tarball。
+- 因此未宣称 packaged Desktop、Host、个人入口、主界面或专家入口验收；当前共享 runtime 在失败的 Profile 准备过程中不再完整，不能继续启动实验。
+- 详细报告：[2026-11-17-full-build-validation.md](docs/2026-11-17-full-build-validation.md)。
+- 回滚：验证分支可回到 `a945acb5e9`；`main` 未被修改、未推送验证分支、未创建发布标签。
+
+### r99-r100 续跑（2026-11-17）
+
+- 最新状态：`staging-ui-passed / packaged-pending`。r108 实际进入个人主界面并显示 8 名预置专家与 3 名原始专家；窗口保留供审核。r109 完整检查退出码 0。详见 [r108 报告](docs/2026-11-17-current-source-startup-r108.md)；物化及 packaged runtime 验收仍在进行，不得据此声明发布完成。
+
+- 验证提交 `aee688b755bb03747ebc6e5227768285bfa80d0e`。staging 启动采用已批准的完整构建范围和回滚，复用当前提交的本地 release 归档；未发布产品。后续物化修复按其独立登记范围执行。
+- 网络诊断及原始证据见 [r99-r100 报告](docs/2026-11-17-profile-network-diagnosis.md)。Profile 安装使用无凭据配置与本机 HTTP 代理，退出码 0。
+- Profile 成功后顺序准备 primary runtime、command、display staging、materialized runtime，验证回执后构建 unsigned 目录包。每个新 run 先记录输入、允许与禁止路径和回滚状态；失败先分诊。启动遵循 [历史门禁](docs/2026-11-15-startup-history-gate.md)，实际验收个人入口、Host、主界面与专家入口，并保留窗口供用户审核。成功构建不等于发布或 UI 验收。
+
 ## 规则维护批次：资源隔离与最小证据（2026-11-16）
 
 - 输入：Astra/high 只读审核、现有全局与项目 AGENTS.md、当前 DESIGN.md、PLAN.md 和历史打包经验。
 - 实施：在上级全局规则新增通用子节；在本项目规则新增 DSH 适配节；新增稳定报告并登记到 docs/RESEARCH_INDEX.md。
 - 验收：全局规则只包含跨项目原则；项目规则只包含 DSH 状态、路径和验收适配；历史命令、日志、哈希和负证据仍留在 docs/ 与 .runs/；现有源码改动未被覆盖。
 - 回滚：删除本批次新增的全局子节、项目适配节、报告和索引行；不回滚本批次之前的源码、计划或历史证据。
+# r106 硬链接上限修复
+
+Astra/high 审计 approved-with-changes。目标：Windows 1024 硬链接上限时安全复制并验证，保留原 EPERM 规则。输入哈希及 dirty 状态见同级 runs/r106-hardlink-limit-20261117-001；参考为现有物化器和验收器源码事实。允许：两个物化脚本、一个规则测试、DESIGN/PLAN及索引。禁止：官方文件、staging、其他产品代码和 r105 运行状态。验收：规则正反例、r107 物化与回执校验。回滚：恢复 r106 pre-snapshot 中两个脚本、删除本批新增测试及文档记录；保留运行证据。
+
+- r106 实施、r107 主动中止与 r109 检查结果见 [硬链接上限报告](docs/2026-11-17-materialize-hardlink-limit-r106.md)；materialized pointer 未生成，打包运行时未验收。

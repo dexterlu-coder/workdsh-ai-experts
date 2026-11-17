@@ -1,0 +1,362 @@
+{
+  "runId": "r111-original-three-platform-audit-20261117-001",
+  "commit": "e94c99d5f9e143fb67fec84a74978eb8218daf32",
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 1070,
+      "sha256": "ae36246eca21ae16838d566147ab356fd79bdf9ae1c2aa53349700e083f2d679",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "upstream.json",
+      "bytes": 1267,
+      "sha256": "1c88d8d40a859af75aa78b73e43b560384449409f1152987a99f91a862917d40",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "package.json",
+      "bytes": 2183,
+      "sha256": "350c3a4cf87292bad78b51b256b14a80aa5e4686c12654082fd2a674e1431cc5",
+      "matchesGitCommit": true
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 16792,
+      "sha256": "8e8d18d06581dbf6f6f0952d1703681283bc3f7887c51158f56de75985e04f13",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/package.json",
+      "bytes": 6668,
+      "sha256": "51589afd13cad8d61797e57d9bf69210b324aa1c14db2e5babb0f7ee5227ba40",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/README.md",
+      "bytes": 7175,
+      "sha256": "d9068ccd8c53e2b319fcd20763632625a2acb2b10895abcac746fd0b6f1d1a05",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/package-dir.mjs",
+      "bytes": 2785,
+      "sha256": "84dae6276cd8f91351296cd0174ca5f023aacef52d27aded34fd4ac4362afc0e",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/package-win.ts",
+      "bytes": 6203,
+      "sha256": "cac3a3f4b4b66b94bfb268421e16f194ff8b68c85183b3c67234031dc920eb1f",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/package-win-portable.ts",
+      "bytes": 607,
+      "sha256": "309ad82e73cb4d6ab712804be2f378e584e27fcb1dce0481cdf41f6169d3e5d0",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/package-mac.ts",
+      "bytes": 6183,
+      "sha256": "81fcd7a14831343ef40e5b5bcd828af86b3275134324be5ae266dbe36b811964",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/release-mac.ts",
+      "bytes": 4687,
+      "sha256": "36b684886ca028b6d721013034ab8a3b96f917efc47380f6a3e74ccac72f0519",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/release-preflight.ts",
+      "bytes": 10110,
+      "sha256": "a7c59783294db8f0301e2e1644878577ee2d313921f6e27b1144ee6072e5d316",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/official-desktop-release.mjs",
+      "bytes": 6025,
+      "sha256": "92bca4fdf76edbed7351c10eeee0ab711ab6afd7253d7b6c18f59fd730a1043e",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/official-desktop-release.test.mjs",
+      "bytes": 7648,
+      "sha256": "7c34b10a90f6f9ae62cd84db3cf2488a75d01991d8d60f0fba9befabdd43b9b5",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/official-runtime-provenance.mjs",
+      "bytes": 3241,
+      "sha256": "ab69d505f56f1d5930cac80e4dc3e37c04cd8b709b6f45d27495b994b781c210",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/runtime-architecture.mjs",
+      "bytes": 665,
+      "sha256": "803659fb04835d6b61fb655f3e2f4d1507740cd71aab39933c484e64516c0577",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/prepare-workdsh-runtime.mjs",
+      "bytes": 10937,
+      "sha256": "6a3cfb201c1a78cd3ab4b4d16a2d32274668dd336c8aee88bbf2d8241064fd0d",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/prepare-workdsh-primary-runtime.mjs",
+      "bytes": 4525,
+      "sha256": "679da02fe900d9284f9b3e43d94881bc86685124564853f9a6a49fe08e0b4a29",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/prepare-workdsh-command.mjs",
+      "bytes": 1395,
+      "sha256": "0157b18dbf8a98bf05fec847d9c145d12eac98c723cb2504b1efbd4c775f3be5",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/start-workdsh.mjs",
+      "bytes": 1275,
+      "sha256": "f242eb18422a17020f456d811480bd04453eadedc898d02817cc4fbcc89b5ae8",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/verify-workdsh-carrier.ts",
+      "bytes": 12773,
+      "sha256": "92827d5f47840b91aa3b2c2769fd824b9921c289b2a138e67051e10dcce3f296",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/verify-win-installer.ts",
+      "bytes": 5207,
+      "sha256": "4c6e51e63eb34a3c8c5124b0e8981600e09907d64941d09cbbbf817be4a4c41b",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/verify-win-portable.ts",
+      "bytes": 2658,
+      "sha256": "e7cb04e20d36e99d895c91a80722a195645eb53e80a20bc6e3b4748333770352",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/verify-mac-smoke.ts",
+      "bytes": 7357,
+      "sha256": "7ebe58ee9b39ffdc712ede301c2b7dd353f6185785c41f81f09a7c5bc7b71e99",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/verify-mac-release.ts",
+      "bytes": 4690,
+      "sha256": "1703dcddadb435480c03835a31dc676541e47fea48174d35088e875fbd3a753a",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/packaged-host-smoke.mjs",
+      "bytes": 5738,
+      "sha256": "3415bafb7d855e2073b2d56dece4185f896a3097c944b9def49a5f86d13b4604",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/verify-electron-fuses.ts",
+      "bytes": 14358,
+      "sha256": "2d482359f66bef88432c2d90ed16c13a0e8009c56bb80736a711e7288c49b5de",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/src/local-runtime.ts",
+      "bytes": 13802,
+      "sha256": "ac2b851156a1ea66fde4158ee8e0da9e03edfcc307a0a9213f4c47029315bc25",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/src/workdsh-main.ts",
+      "bytes": 27258,
+      "sha256": "272795929b8b909e15f7848f268a551488403134c51aa61e91dd4df9a63c89ac",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/src/owned-process.ts",
+      "bytes": 9866,
+      "sha256": "12913d81bb365d14895b334602538fe0e605540f2640a48f22abf1237e240753",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/src/official-command.ts",
+      "bytes": 3550,
+      "sha256": "d4172a3d79cfe061905de635a845997788c973d9a7d60cfe05b5185ec9b1df6f",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/src/command-management.ts",
+      "bytes": 4455,
+      "sha256": "9397598a3622246e77111a11b9dbf07d1eda7ef02411b4fc8ce955105842eefd",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/src/command-cli.ts",
+      "bytes": 3742,
+      "sha256": "64f73c7ca41d858eb9cd5b6109b81fdd3cb0b7a331d72eaffaedc757f92ec5d8",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/src/plugin-archive-cache.ts",
+      "bytes": 2850,
+      "sha256": "906aba24622b6070ace438f6b37b52905897dec463787b49beb078cd04d84dd5",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "scripts/package-desktop-release.mjs",
+      "bytes": 6809,
+      "sha256": "e50e993d65493dad5ea12f6b95d6903534c0686899ca871c52aec6d4b747712c",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "scripts/prepare-test-electron.mjs",
+      "bytes": 431,
+      "sha256": "89aede02d65e0d309deb4041763787caa16d888a96ae0eeb8088431d336e3d73",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/web/package.json",
+      "bytes": 26196,
+      "sha256": "bb8c18d53bfe41267ab0e9653a3248e9a95da0363b651ee0f6bfcd2346a95ec9",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/web/scripts/start-preview.mjs",
+      "bytes": 3424,
+      "sha256": "cb1f02189c0170fe7f95f03aa448a7eba093487a54ab7a281d96e8c201de30aa",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/web/scripts/check-environment.mjs",
+      "bytes": 541,
+      "sha256": "f2510dd9447a65e44b03b73d0d29a730ba0895257c04c080dc2d0e0ebdabcb5b",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/web/scripts/desktop/README.md",
+      "bytes": 673,
+      "sha256": "c6dd9ad89d0cbb245577622ddb87630503634be9dde28344f998b0b647bb29b7",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/web/scripts/desktop/pack-desktop.mjs",
+      "bytes": 11049,
+      "sha256": "051070772378804db88426db525f33c2205bb58997cfc571edb00aa2ed12f009",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/web/scripts/desktop/patches/upstream/apps/desktop/electron-builder.config.mjs",
+      "bytes": 4438,
+      "sha256": "3036bc28c0ab5f51e544429cb56a429095f39903178c1fa3971bab11847cf7e3",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/web/scripts/desktop/patches/upstream/apps/desktop/scripts/desktop-build-paths.mjs",
+      "bytes": 3316,
+      "sha256": "c64e3a28f93c3d95725848ab730560307cb58043032190a9201d8d752378e52c",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/web/scripts/preview-process-environment.mjs",
+      "bytes": 980,
+      "sha256": "dba349eae45d85b12b45436acc458171b28ca1ddbdb19c41aa3947fcf5d09996",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/verify-profile-release.test.mjs",
+      "bytes": 14405,
+      "sha256": "a74d54ddae4774bdb5de66c313fc81c08c3f14cd2a839d2a9a32fbf5f906593b",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/electron-builder-environment.ts",
+      "bytes": 495,
+      "sha256": "9d4cc479cedd1a951055a5558d620728f907fc1cb93c0cb543eed771227c9ba5",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/verify-installation-anchor.mjs",
+      "bytes": 6614,
+      "sha256": "3d3a6d48e13defe269eb47dff865917bdaafac07b21b41ae74b67705d687c08a",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/probe-windows-packaged-runtime.ts",
+      "bytes": 2579,
+      "sha256": "f59b1a288c483b3bd4f6c855358e220a3596a6805b2d98a6dbd25d81c61e82df",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/tests/package-win.spec.ts",
+      "bytes": 5561,
+      "sha256": "45105e3e6cedebae2e8509ed2d84a6d1acce621f937b11e4ba7499982157f744",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/tests/package-mac.spec.ts",
+      "bytes": 5501,
+      "sha256": "e48c4fc036cc8fe6b525677821bced9c1d5b62f53133b7c61aef5ec373dd3f09",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/tests/owned-process.spec.ts",
+      "bytes": 1353,
+      "sha256": "638110e2703f5384e72cff8df3d3fd7d2a80a5d77b8fa371c1eefcfdf29a54a6",
+      "matchesGitCommit": true
+    },
+    {
+      "path": ".yarnrc.yml",
+      "bytes": 837,
+      "sha256": "6bce2b30487e6f74a0d15ece042b9324d6103117dc8fc4729e0dc926f0fc2989",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "patches/app-builder-lib@26.15.7.patch",
+      "bytes": 7531,
+      "sha256": "f6237929e62a3dae05899382493cf2fe4dfac6870ee7b2d06c430e5aa6a51d43",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/generate-mac-app-icon.mjs",
+      "bytes": 3260,
+      "sha256": "1ff4c3fdde0bf2d4a0d4e3fd30abbf67302e6b6edddb4a92ed2276eb4dff1e4f",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/generate-windows-app-icon.mjs",
+      "bytes": 7644,
+      "sha256": "3f2f06c003d60f0c81e8501c4726e6c3dd7dea37fb15c559d97e3ea968e9d725",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/generate-tray-icons.mjs",
+      "bytes": 1353,
+      "sha256": "9b84af8af9c8cd5de1ee96e959e4f2918d12a4bfb7ca7ca2f49e3ad64c824b51",
+      "matchesGitCommit": true
+    },
+    {
+      "path": "apps/desktop/scripts/node-runtime-entitlements.plist",
+      "bytes": 307,
+      "sha256": "6e9f11f9fb3d5fe23c7b3eb5bcd317f7c5b90ef1704815afbe3171c8186fd1eb",
+      "matchesGitCommit": true
+    }
+  ],
+  "date": "2026-11-17",
+  "nature": "original source snapshot and static analysis baseline",
+  "repository": "https://github.com/techflag/workdsh",
+  "commitDate": "2026-10-31T20:55:58+08:00",
+  "archiveName": "workdsh-main.zip",
+  "archiveBytes": 53268823,
+  "archiveSha256": "4ab764957cffbc9c52dfc36cea0429af46033163e9087bd21a986a9c1bcbec37",
+  "zipComment": "e94c99d5f9e143fb67fec84a74978eb8218daf32",
+  "normalizationForGitComparison": "CRLF and LF normalized; stored hashes cover exact ZIP entry bytes",
+  "snapshotRoot": "source",
+  "fileCount": 57,
+  "sourceBytes": 335042,
+  "license": "MIT; Copyright (c) 2026 Anywhere Labs",
+  "executionPerformed": false
+}

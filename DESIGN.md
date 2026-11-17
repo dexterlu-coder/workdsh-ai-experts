@@ -1,8 +1,16 @@
 # WorkDSH Desktop 启动诊断设计
 
+当前有效状态（2026-11-17）：`source-build-and-staging-ui-accepted / awaiting-user-review`。r100 官方 Profile 安装、r109 完整源码检查和 r108 实际品牌界面及 8 个新增专家均通过。成功窗口保持运行，详见 [r108 验收](docs/2026-11-17-current-source-startup-r108.md)。以下旧批次 blocked 状态是历史记录，已经被对应续跑结果取代；安装包物化与 packaged-runtime 验收仍未通过，后续范围见 [交接计划](docs/2026-11-17-packaged-validation-handoff.md)。
+
 状态：`completed-with-current-source-launch`
 
 本文件与 [PLAN.md](PLAN.md) 互相引用。当前记录的目标是解释历史临时环境为何能够启动、当前源码为何被 Windows 拒绝访问，并保留可复核的启动路径。
+
+原版平台契约参考（2026-11-17）：[二次开发前三平台详细基线](docs/2026-11-17-original-three-platform-baseline.md)固定可追溯的 e94c99d5 快照，记录 Windows/macOS 原生打包、Linux Desktop 链路缺口、相对链接、工具资源、签名和进程差异。该材料属于只读调查，不改变当前实施授权、产品边界或 packaged-runtime 未验收状态；后续平台方案按其 P01—P20 检查项比较。
+
+r112 对照补充：[当前平台契约比较](docs/2026-11-17-current-platform-contract-comparison.md)和[Windows 流程/路径地图](docs/2026-11-17-current-windows-packaging-map.md)记录新增转换的文件 symlink/大小写/公共物化风险以及实际 pointer 观察。当前仅研究完成；平台适配方案未冻结，原兼容提案范围不足，不修改产品行为，也不新增 Linux Desktop 支持。
+
+r113 用户授权将当前分支合并 main，见[合并工作包](docs/2026-11-17-main-merge-plan.md)。本批仅收录既有资产、必要测试修正及 PR 合并，不改变产品架构，不标记 packaged-runtime 或发布通过。
 
 ## 结论与边界
 
@@ -64,7 +72,17 @@ r74 打包经验已归档到 [2026-11-15-r74-packaging-lessons.md](docs/2026-11-
 
 状态：`completed / controlled-reuse-ui-accepted`。本批次用于验证当前源码已经验收的品牌界面产物，与此前已验收的八个预置专家发布包能否在同一隔离个人运行中同时工作。复用已能启动的 Electron、官方 DSH `0.2.1-rc.5` runtime、Profile、Host 和当前自有 Bundle/UI，只覆盖 WorkDSH 自有专家包；不重建或修改官方 DSH runtime。实际窗口和无障碍树均确认“AI专家办事大厅”品牌、Host ready，以及 8 个预置专家加 3 个原始专家。证据见 [2026-11-16-controlled-reuse-ui-expert-acceptance.md](docs/2026-11-16-controlled-reuse-ui-expert-acceptance.md) 和 [.runs/r86-controlled-reuse-ui-experts-20261116-001/final-receipt.json](.runs/r86-controlled-reuse-ui-experts-20261116-001/final-receipt.json)。该结果是受控组合验收，不替代干净源码全量可复现构建。
 
+### 完整构建分支验收（2026-11-17）
+
+最新状态：`staging-ui-passed / packaged-pending`。r108 在隔离个人运行中实际显示品牌主界面、原生 Conversation 和 8 名预置专家；r109 完整源码检查退出码 0。运行输入、冷启动失败和证据边界见 [r108 报告](docs/2026-11-17-current-source-startup-r108.md)；packaged runtime 仍待验收。
+
+续跑输入提交 `aee688b755bb03747ebc6e5227768285bfa80d0e`。r99 单变量网络探针及 r100 安装结果见 [网络诊断](docs/2026-11-17-profile-network-diagnosis.md)；续跑顺序、隔离和验收边界见 [PLAN.md](PLAN.md)。既有失败证据保留，实际 packaged runtime 仍待验收。
+
+验证分支 `codex/full-build-validation-20261116` 已通过源码无头门禁和 Web/WorkDSH 自有归档生成；归档包含 8 个预置专家包和当前品牌 carrier。官方 Profile 安装需要的 `@deepseek-ai/cordis@4.0.5` tarball 不在本机可用缓存中，配置镜像网络失败，官方 registry 切换因本机认证凭据边界被自动审查拒绝。因此本批次保持 `blocked / packaged-runtime-not-accepted`，不把源码构建或归档成功写成 Desktop runtime/UI 成功。详细事实、runId 和回滚见 [2026-11-17-full-build-validation.md](docs/2026-11-17-full-build-validation.md)。
+
 
 ## 资源隔离与最小证据规则
 
 2026-11-16 Astra/high 只读审核确认：跨项目原则写入上级 D:\project\codex\AGENTS.md，DSH 运行时和验收落点写入本项目 AGENTS.md。独立运行目录只隔离会互相影响的可变状态；来源、版本、哈希、权限、架构、路径和链接语义已确认稳定且只读的输入优先复用。审核依据、边界和历史案例见 docs/2026-11-16-resource-isolation-and-minimum-evidence.md。
+
+- r106 物化上限修复和 r107 未完成的打包运行时验收见 [报告](docs/2026-11-17-materialize-hardlink-limit-r106.md)，实施状态见 [PLAN.md](PLAN.md)。
