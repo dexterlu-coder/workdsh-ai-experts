@@ -2,7 +2,7 @@
 
 /** Expand verified Windows Junctions into a self-contained regular-file runtime for packaging. */
 import { createHash } from 'node:crypto'
-import { readFileSync } from 'node:fs'
+import { constants, readFileSync } from 'node:fs'
 import { copyFile, link, lstat, mkdir, readdir, readFile, realpath, rm, stat, writeFile } from 'node:fs/promises'
 import { basename, dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -25,6 +25,7 @@ const inside = (root, candidate) => {
 }
 const hash = bytes => createHash('sha256').update(bytes).digest('hex').toUpperCase()
 const fail = message => { throw new Error(`Display materialization refused: ${message}`) }
+export const isWindowsHardlinkLimit = (platform, code, before, after) => platform === 'win32' && ['UNKNOWN', 'EMLINK'].includes(code) && after.isFile() && after.nlink >= 1024n && after.dev === before.dev && after.ino === before.ino
 const exists = async path => { try { await lstat(path); return true } catch { return false } }
 async function safeCreateDirectory(path, boundary) {
   const missing = []
@@ -83,10 +84,20 @@ async function materializeEntry(sourcePath, destinationPath, relativePath, activ
     await link(sourcePath, destinationPath)
     hardlinkCount += 1
   } catch (error) {
-    if (error.code !== 'EPERM' || info.nlink <= 1) fail(`materialized hardlink failed for ${normalizedRelative}: ${error.code ?? error.message}`)
-    await copyFile(sourcePath, destinationPath)
+    const after = await lstat(sourcePath, { bigint: true })
+    const limit = isWindowsHardlinkLimit(process.platform, error.code, sourcePhysical, after)
+    if (!limit && (error.code !== 'EPERM' || info.nlink <= 1)) fail(`materialized hardlink failed for ${normalizedRelative}: ${error.code ?? error.message}`)
+    await copyFile(sourcePath, destinationPath, constants.COPYFILE_EXCL)
+    let fallback = { path: normalizedRelative, reason: 'EPERM+nlink>1' }
+    if (limit) {
+      const output = await stat(destinationPath, { bigint: true })
+      const sourceBytes = await readFile(sourcePath)
+      const outputBytes = await readFile(destinationPath)
+      if (output.dev === after.dev && output.ino === after.ino || BigInt(sourceBytes.length) !== after.size || output.size !== after.size || hash(sourceBytes) !== hash(outputBytes)) fail(`materialized fallback integrity mismatch: ${normalizedRelative}`)
+      fallback = { path: normalizedRelative, reason: 'win32-hardlink-limit', platform: process.platform, errorCode: error.code, sourceNlinkAtFailure: after.nlink.toString(), sourceDev: after.dev.toString(), sourceIno: after.ino.toString(), sha256: hash(sourceBytes), bytes: after.size.toString() }
+    }
     copyFallbackCount += 1
-    copyFallbacks.push({ path: normalizedRelative, reason: 'EPERM+nlink>1' })
+    copyFallbacks.push(fallback)
       materializeMode = 'fallback'
   }
     const outputPhysical = await stat(destinationPath, { bigint: true })
@@ -196,4 +207,4 @@ async function main() {
   console.log(JSON.stringify({ ...pointer, hardlinkCount, copyFallbackCount, junctionExpansionCount, targetCopyCount, manifest: receipt.manifest }, null, 2))
 }
 
-await main()
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await main()

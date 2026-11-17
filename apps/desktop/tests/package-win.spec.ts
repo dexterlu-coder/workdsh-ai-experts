@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { join } from 'node:path'
 import {
   packageWindowsArtifact,
   packageWindowsInstaller,
@@ -66,7 +67,7 @@ describe('Windows x64 installer packaging', () => {
         '--x64',
         '--publish',
         'never',
-        '--config=C:\\repo\\dsh-plugin-desktop\\scripts\\electron-builder-config.mjs',
+        `--config=${join('C:\\repo\\dsh-plugin-desktop', 'scripts', 'electron-builder-config.mjs')}`,
         '--config.win.signExecutable=false',
         '--config.npmRebuild=false',
       ],
@@ -105,7 +106,7 @@ describe('Windows x64 installer packaging', () => {
       '--x64',
       '--publish',
       'never',
-      '--config=C:\\repo\\dsh-plugin-desktop\\scripts\\electron-builder-config.mjs',
+      `--config=${join('C:\\repo\\dsh-plugin-desktop', 'scripts', 'electron-builder-config.mjs')}`,
       '--config.win.signExecutable=false',
       '--config.npmRebuild=false',
     ])
@@ -138,7 +139,7 @@ describe('Windows x64 installer packaging', () => {
       '--x64',
       '--publish',
       'never',
-      '--config=C:\\repo\\dsh-plugin-desktop\\scripts\\electron-builder-config.mjs',
+      `--config=${join('C:\\repo\\dsh-plugin-desktop', 'scripts', 'electron-builder-config.mjs')}`,
       '--config.win.signExecutable=false',
       '--config.npmRebuild=false',
     ])

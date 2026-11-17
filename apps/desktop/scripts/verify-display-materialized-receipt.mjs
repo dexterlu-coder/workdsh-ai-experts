@@ -11,6 +11,11 @@ const inside = (root, candidate) => {
   return b === a || b.startsWith(a + '/')
 }
 const readJson = path => JSON.parse(readFileSync(path, 'utf8'))
+export function verifyHardlinkLimitFallback(fallback, origin, source, sourcePath, outputPath) {
+  if (fallback.platform !== 'win32' || !['UNKNOWN', 'EMLINK'].includes(fallback.errorCode) || typeof fallback.sourceNlinkAtFailure !== 'string' || !/^\d+$/u.test(fallback.sourceNlinkAtFailure) || BigInt(fallback.sourceNlinkAtFailure) < 1024n || fallback.sourceDev !== origin.sourceDev || fallback.sourceIno !== origin.sourceIno || fallback.bytes !== source.bytes || typeof fallback.sha256 !== 'string' || origin.sourceDev === origin.outputDev && origin.sourceIno === origin.outputIno) throw new Error('Invalid hardlink limit evidence')
+  const sourceBytes = readFileSync(sourcePath); const outputBytes = readFileSync(outputPath)
+  if (String(sourceBytes.length) !== fallback.bytes || String(outputBytes.length) !== fallback.bytes || hash(sourceBytes) !== fallback.sha256 || hash(outputBytes) !== fallback.sha256) throw new Error('Fallback hash mismatch')
+}
 const scanNoReparse = root => {
   const stack = [root]
   while (stack.length > 0) {
@@ -66,13 +71,28 @@ export function verifyDisplayMaterializedReceipt(pointerPath, desktopRoot) {
   const stagingManifestPath = join(stagingRunRoot, staging.receipt.stagingManifest.path)
   const stagingManifest = readJson(stagingManifestPath)
   const stagingByPath = new Map(stagingManifest.map(item => [item.path, item]))
+  const fallbackByPath = new Map()
+  for (const item of receipt.copyFallbacks) {
+    if (typeof item.path !== 'string' || fallbackByPath.has(item.path) || !['EPERM+nlink>1', 'win32-hardlink-limit'].includes(item.reason)) throw new Error('Invalid or duplicate fallback')
+    fallbackByPath.set(item.path, item)
+  }
   for (const origin of receipt.outputOrigins) {
     const output = manifestByPath.get(origin.output)
     const source = stagingByPath.get(origin.source)
     if (!output || !source || output.type !== 'file' || source.type !== 'file' || output.bytes !== String(origin.outputBytes ?? origin.bytes) || output.dev !== origin.outputDev || output.ino !== origin.outputIno || output.nlink !== origin.outputNlink || source.bytes !== String(origin.sourceBytes ?? origin.bytes) || source.dev !== origin.sourceDev || source.ino !== origin.sourceIno || source.nlink !== origin.sourceNlink) throw new Error(`Materialized output origin mismatch: ${origin.output}`)
     if (origin.mode !== 'target' && output.bytes !== source.bytes) throw new Error(`Materialized non-target bytes changed: ${origin.output}`)
     if (origin.mode === 'hardlink' && (origin.sourceDev !== origin.outputDev || origin.sourceIno !== origin.outputIno)) throw new Error(`Materialized hardlink identity mismatch: ${origin.output}`)
-    if (origin.mode === 'fallback' && (origin.sourceDev === origin.outputDev && origin.sourceIno === origin.outputIno || Number(origin.sourceNlink) <= 1 || !receipt.copyFallbacks.some(item => item.path === origin.output && item.reason === 'EPERM+nlink>1'))) throw new Error(`Materialized fallback identity mismatch: ${origin.output}`)
+    if (origin.mode === 'fallback') {
+      const fallback = fallbackByPath.get(origin.output)
+      if (!fallback || origin.sourceDev === origin.outputDev && origin.sourceIno === origin.outputIno) throw new Error(`Materialized fallback identity mismatch: ${origin.output}`)
+      if (fallback.reason === 'EPERM+nlink>1' && Number(origin.sourceNlink) <= 1) throw new Error(`Materialized fallback link count mismatch: ${origin.output}`)
+      if (fallback.reason === 'win32-hardlink-limit') {
+        const sourcePath = join(staging.receipt.stagingRoot, origin.source)
+        const outputPath = join(pointer.outputRoot, origin.output)
+        if (!inside(staging.receipt.stagingRoot, sourcePath) || !inside(pointer.outputRoot, outputPath)) throw new Error('Fallback path escapes root')
+        verifyHardlinkLimitFallback(fallback, origin, source, sourcePath, outputPath)
+      }
+    }
     if (origin.mode === 'target' && origin.sourceDev === origin.outputDev && origin.sourceIno === origin.outputIno) throw new Error(`Materialized target shares source inode: ${origin.output}`)
   }
   const stagingByPhysical = new Map(staging.receipt.changedFiles.map(item => [item.physicalRelative, item]))
