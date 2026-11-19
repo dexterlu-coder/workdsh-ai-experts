@@ -1,5 +1,7 @@
 # WorkDSH Desktop 启动诊断设计
 
+2026-11-20 用户已通过[进入/退出弹窗修复](docs/2026-11-19-startup-exit-dialog-fix.md)的体验验收，并授权将修复分支合入 `main`。完整无头检查、个人模式启动、正常退出及受控慢启动取消均已通过，个人模式显示 11 名专家。以下 2026-11-17 状态为历史记录。
+
 当前有效状态（2026-11-17）：`source-build-and-staging-ui-accepted / awaiting-user-review`。r100 官方 Profile 安装、r109 完整源码检查和 r108 实际品牌界面及 8 个新增专家均通过。成功窗口保持运行，详见 [r108 验收](docs/2026-11-17-current-source-startup-r108.md)。以下旧批次 blocked 状态是历史记录，已经被对应续跑结果取代；安装包物化与 packaged-runtime 验收仍未通过，后续范围见 [交接计划](docs/2026-11-17-packaged-validation-handoff.md)。
 
 状态：`completed-with-current-source-launch`
