@@ -128,6 +128,8 @@
 
 ## 证据
 
+- [Windows 进入/退出弹窗修复](docs/2026-11-19-startup-exit-dialog-fix.md)已通过源码审查、完整检查和 Windows 实机验证。2026-11-20 用户通过体验验收，授权提交、推送并通过 PR 合入 `main`。合并提交及检查结果以 GitHub PR 为准。
+
 - r113 审核 / r114 main 合并批次：[冻结工作包](docs/2026-11-17-main-merge-plan.md)。Astra/high 为 approved-with-changes；文档登记导致旧快照变化已按意见换 r114 重新冻结。用户授权合并当前分支；仅补必要测试适配并提交稳定源码/文档，通过 PR 和适用必需门禁合并；不发产品、不改 CI、不重构平台策略、不碰当前窗口。状态及范围以该工作包为准。
 - r112 当前平台调查：[契约对照](docs/2026-11-17-current-platform-contract-comparison.md)、[Windows 地图](docs/2026-11-17-current-windows-packaging-map.md)。范围：原版/当前 75 路径哈希和必要 diff、有限只读路径观察及文档；allowlist 仅两份新报告、兼容提案、总目录、DESIGN/PLAN 和 `.runs/r112-current-platform-contract-audit-20261117-001/`；禁止产品/运行时修改、构建/GUI/依赖安装、提交推送发布。验收：来源与输入哈希、P01—P20 对照、路径观察、链接及产品输入未变；回滚只撤销本轮文档增量，保留之前 dirty 状态。状态：`research-complete / adaptation-design-not-frozen`。
 - 原版三平台契约基线：[2026-11-17-original-three-platform-baseline.md](docs/2026-11-17-original-three-platform-baseline.md)；r111 为只读源码调查与文档交付，57 个节选文件与 e94c99d5 匹配，不运行构建或改动当前应用。allowlist 为该报告、`references/original-platform-baseline-e94c99d5/`、总目录、DESIGN/PLAN 及 r111 回执；禁止产品/官方源码、运行时、锁文件、构建配置、GUI/进程、Git 推送或发布变更。验收为来源/源文件哈希、引用链接及边界核对；回滚只移除本轮新增材料和入口，保留 pre-documentation 中既有 dirty 内容。状态：`research-complete / no-product-change`。

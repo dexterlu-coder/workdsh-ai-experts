@@ -5,7 +5,7 @@ import { cleanOwnedProcessTree, stopOwnedProcess, trackOwnedProcess, selectOwned
 
 vi.mock('node:child_process', () => ({ spawn: vi.fn() }))
 const platform = Object.getOwnPropertyDescriptor(process, 'platform')!
-afterEach(() => { Object.defineProperty(process, 'platform', platform); vi.restoreAllMocks() })
+afterEach(() => { Object.defineProperty(process, 'platform', platform); vi.useRealTimers(); vi.restoreAllMocks() })
 function fixture(rows: WindowsProcessIdentity[], options: { exited?: boolean, taskkillCode?: number, queryFails?: boolean, osPresent?: boolean } = {}) {
   Object.defineProperty(process, 'platform', { value: 'win32', configurable: true })
   vi.spyOn(Date, 'now').mockReturnValue(1000)
@@ -125,3 +125,44 @@ tool.stdout.once('data',data=>{process.stdout.write(data,()=>process.exit(0))});
     await cleanOwnedProcessTree(parent)
   }
 }, 20_000)
+
+function timedFixture(delays: number[], responses: unknown[]) {
+  Object.defineProperty(process, 'platform', { value: 'win32', configurable: true })
+  vi.useFakeTimers(); vi.setSystemTime(1000)
+  vi.spyOn(process, 'kill').mockImplementation(() => { throw Object.assign(new Error('missing'), { code: 'ESRCH' }) })
+  const child = Object.assign(new EventEmitter(), { pid: 424242 }) as unknown as ChildProcess
+  trackOwnedProcess(child, 900)
+  const tasks: Array<{ kill: ReturnType<typeof vi.fn> }> = []
+  vi.mocked(spawn).mockImplementation(() => {
+    const task = Object.assign(new EventEmitter(), { stdout: new EventEmitter(), stderr: new EventEmitter(), kill: vi.fn() })
+    const index = tasks.push(task) - 1
+    if (Number.isFinite(delays[index])) setTimeout(() => { task.stdout.emit('data', JSON.stringify(responses[index])); task.emit('close', 0) }, delays[index])
+    return task as unknown as ChildProcess
+  })
+  return { child, tasks }
+}
+
+it('budget allows several slow commands to confirm a missing process', async () => {
+  const row = { pid: 424242, ppid: 1, createdAt: 950 }
+  const { child, tasks } = timedFixture([5000, 5000, 5000], [[row], { status: 'taskkill', code: 0 }, []])
+  const result = expect(cleanOwnedProcessTree(child)).resolves.toBeUndefined()
+  await vi.advanceTimersByTimeAsync(15000); await result
+  expect(tasks).toHaveLength(3)
+})
+
+it('budget kills a stalled helper at ten seconds and rejects', async () => {
+  const { child, tasks } = timedFixture([Infinity], [])
+  const result = expect(cleanOwnedProcessTree(child)).rejects.toThrow('清理查询超时')
+  await vi.advanceTimersByTimeAsync(9999); expect(tasks[0]!.kill).not.toHaveBeenCalled()
+  await vi.advanceTimersByTimeAsync(1); await result
+  expect(tasks[0]!.kill).toHaveBeenCalledOnce()
+})
+
+it('budget truncates the last helper to remaining time without starting another', async () => {
+  const row = { pid: 424242, ppid: 1, createdAt: 950 }
+  const { child, tasks } = timedFixture([9000, 9000, 9000, 9000, Infinity], [[row], { status: 'taskkill', code: 0 }, [row], { status: 'taskkill', code: 0 }])
+  const result = expect(cleanOwnedProcessTree(child)).rejects.toThrow('清理查询超时')
+  await vi.advanceTimersByTimeAsync(39999); expect(tasks).toHaveLength(5); expect(tasks[4]!.kill).not.toHaveBeenCalled()
+  await vi.advanceTimersByTimeAsync(1); await result
+  expect(tasks[4]!.kill).toHaveBeenCalledOnce(); expect(tasks).toHaveLength(5)
+})

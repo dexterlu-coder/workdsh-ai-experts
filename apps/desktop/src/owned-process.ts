@@ -80,8 +80,8 @@ function processMissing(pid: number): boolean {
 async function cleanWindowsTree(child: ChildProcess): Promise<void> {
   const state = ownership.get(child)
   if (!state) throw new Error('Windows 本机进程缺少所有权记录，未停止未知进程')
-  const deadline = Date.now() + 12_000
-  const budget = (): number => { const remaining = deadline - Date.now(); if (remaining <= 0) throw new Error('Windows 本机进程树清理超时'); return Math.min(4000, remaining) }
+  const deadline = Date.now() + 40_000
+  const budget = (): number => { const remaining = deadline - Date.now(); if (remaining <= 0) throw new Error('Windows 本机进程树清理超时'); return Math.min(10_000, remaining) }
   for (let pass = 0; pass < 8; pass++) {
     const queried = new Set([state.pid, ...state.known.map(row => row.pid)])
     const rows = await windowsSnapshot([...queried], budget())

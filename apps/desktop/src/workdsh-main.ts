@@ -28,6 +28,8 @@ const READY_PATTERN = /dsh web:\s+(http:\/\/127\.0\.0\.1:\d+\/?\?token=[^\s]+)/u
 
 let runtime: ChildProcess | undefined
 let runtimeStarting = false
+const stoppingChildren = new WeakSet<ChildProcess>()
+let clearRuntimeTimeout: (() => void) | undefined
 let window: BrowserWindow | undefined
 let quitting = false
 let switching = false
@@ -40,6 +42,7 @@ let managedBackend: string | undefined
 let entrySurface = false
 let pendingConnection: ReturnType<typeof enterpriseConnection> | undefined
 let enterprise: { login: EnterpriseLogin, root: string, home: string, deviceId: string, authority?: Authority, authFile?: string } | undefined
+const stoppingSessions = new WeakSet<object>()
 let verifyTimer: ReturnType<typeof setInterval> | undefined
 let verifying = false
 
@@ -163,10 +166,12 @@ function openWindow(url: string, connection: DesktopConnection = { mode: 'person
     })
   }
   void page.loadURL(url).then(() => {
-    if (page.isDestroyed()) return
+    if (page.isDestroyed() || window !== page || quitting || quitRequested || (!carrier && runtime !== undefined && stoppingChildren.has(runtime))) return
     page.show()
     if (previous && !previous.isDestroyed()) previous.destroy()
   }).catch(() => {
+    if (window !== page) { if (!page.isDestroyed()) page.destroy(); return }
+    if (quitting || quitRequested || (!carrier && runtime !== undefined && stoppingChildren.has(runtime))) return
     if (!page.isDestroyed()) page.destroy()
     if (previous && !previous.isDestroyed()) { window = previous; entrySurface = previousEntrySurface }
     dialog.showErrorBox('无法打开工作区', '请检查企业地址、网络或本地运行状态。')
@@ -240,6 +245,7 @@ async function startRuntime(home: string, connection: DesktopConnection, patches
   runtime = child
   runtimeStarting = true
   let ready = false
+  let reported = false
   let output = ''
   let diagnosticOutput = ''
   const recordOutput = (safe: string): void => {
@@ -254,11 +260,12 @@ async function startRuntime(home: string, connection: DesktopConnection, patches
     // Host is being started. The Host can emit its one-shot ready URL before
     // that navigation finally clears the flag, so readiness must not be
     // discarded merely because the initiating transition is still active.
-    if (ready || runtime !== child) return
+    if (ready || runtime !== child || stoppingChildren.has(child) || quitRequested || quitting) return
     output = `${output}${text}`.slice(-16_384)
     const match = READY_PATTERN.exec(output)
     if (match?.[1] !== undefined) {
       ready = true
+      clearRuntimeTimeout?.()
       runtimeStarting = false
       openWindow(match[1], connection)
     }
@@ -282,40 +289,49 @@ async function startRuntime(home: string, connection: DesktopConnection, patches
   child.stderr.on('data', chunk => { stderrRedactor.push(chunk); consumeReady(chunk) })
   child.stderr.once('end', () => stderrRedactor.end())
   child.once('error', cause => {
-    if (!quitting && runtime === child) { dialog.showErrorBox('启动失败', redactRuntimeOutput(cause.message)); void returnToEntry() }
+    if (!quitting && !quitRequested && runtime === child && !stoppingChildren.has(child) && !reported) { reported = true; dialog.showErrorBox('启动失败', redactRuntimeOutput(cause.message)); void returnToEntry() }
   })
   child.once('exit', code => {
     if (runtime !== child) return
     void cleanOwnedProcessTree(child).then(() => {
-      if (runtime === child) { runtime = undefined; runtimeStarting = false }
-      if (!quitting && !switching) {
+      if (runtime !== child) return
+      runtime = undefined; runtimeStarting = false
+      if (!quitting && !quitRequested && !stoppingChildren.has(child) && !reported) {
+        reported = true
         dialog.showErrorBox('本机运行已停止', failureDetail(code))
         void returnToEntry()
       }
     }).catch(() => {
+      if (runtime !== child || stoppingChildren.has(child)) return
       runtimeStarting = false
       dialog.showErrorBox('本机运行失败，进程清理未确认', failureDetail(code, true))
     })
   })
-  const readyTimeout = setTimeout(() => { if (!ready && runtime === child) { dialog.showErrorBox('启动超时', '官方 DSH 尚未就绪，已停止本机进程'); void returnToEntry() } }, 90_000)
+  const readyTimeout = setTimeout(() => { if (!ready && runtime === child && !stoppingChildren.has(child) && !reported) { reported = true; dialog.showErrorBox('启动超时', '官方 DSH 尚未就绪，正在尝试停止本机进程'); void returnToEntry() } }, 90_000)
+  clearRuntimeTimeout = () => clearTimeout(readyTimeout)
   child.once('exit', () => clearTimeout(readyTimeout))
 }
 
 function stopRuntime(): void {
   quitting = true
-  if (runtime !== undefined) void cleanOwnedProcessTree(runtime)
-  runtime = undefined
-  runtimeStarting = false
+  const child = runtime
+  if (child !== undefined) {
+    stoppingChildren.add(child); clearRuntimeTimeout?.()
+    void cleanOwnedProcessTree(child).then(() => { if (runtime === child) { runtime = undefined; runtimeStarting = false } }).catch(() => dialog.showErrorBox('进程清理失败', '本机进程清理尚未确认，请稍后重试。'))
+  }
 }
 
 async function leaveWorkspace(): Promise<void> {
   const page = window
+  const child = runtime
+  if (child) stoppingChildren.add(child)
+  clearRuntimeTimeout?.()
   if (verifyTimer) { clearInterval(verifyTimer); verifyTimer = undefined }
   const session = enterprise
+  if (session) stoppingSessions.add(session)
   // Shut admission before waiting for any graceful process exit.
   await session?.authority?.close()
   session?.login.cancelRequests()
-  const child = runtime
   if (child) { await stopOwnedProcess(child); if (runtime === child) { runtime = undefined; runtimeStarting = false } }
   enterprise = undefined
   rememberCommandSpace()
@@ -390,6 +406,7 @@ function connectEntryNavigation(entry: BrowserWindow): void {
           await leaveWorkspace(); showConnectionEntry()
         }
       } catch (error) {
+        if (quitRequested || quitting) return
         dialog.showErrorBox('无法进入', error instanceof Error ? error.message : '请检查入口配置')
         showConnectionEntry()
       } finally { endSwitch() }
@@ -435,6 +452,7 @@ async function activateEnterprise(existingHome: boolean): Promise<void> {
       const current=installedEnterprisePlugins(join(runtimeHome(),'profiles',PROFILE_NAME),JSON.parse(readFileSync(join(bundledProfileDirectory(),'node_modules','@deepseek-ai','dsh','package.json'),'utf8')).version)
       if(pluginNames.some(name=>!current.includes(name)))throw new Error('企业插件已卸载，请重新安装后登录')
     }).catch(() => {
+      if (enterprise !== session || stoppingSessions.has(session) || quitting || quitRequested) return
       dialog.showErrorBox('企业认证不可用', '企业账号已过期、被撤销、后台不可达或企业插件已卸载。本机企业运行将停止，请检查后重新登录。')
       void returnToEntry()
     }).finally(() => { verifying = false })
@@ -458,7 +476,7 @@ function installLoginHandlers(): void {
       return {}
     } catch (error) {
       const message = error instanceof Error ? error.message : '企业登录失败'
-      if (enterprise) { await leaveWorkspace(); showConnectionEntry(); dialog.showErrorBox('无法进入企业', message) }
+      if (enterprise) { await leaveWorkspace(); if (!quitRequested && !quitting) { showConnectionEntry(); dialog.showErrorBox('无法进入企业', message) } }
       else if (admittedLogin && !await admittedLogin.logout()) dialog.showErrorBox('企业启动未完成', '本机未进入企业运行；后台连接失败，远端登录撤销尚未确认。')
       return { error: message }
     } finally { endSwitch() }
@@ -498,8 +516,9 @@ if (!app.requestSingleInstanceLock()) {
   app.on('before-quit', event => {
     if (quitting) { stopRuntime(); return }
     event.preventDefault()
+    quitRequested = true
+    if (runtime) { stoppingChildren.add(runtime); clearRuntimeTimeout?.() }
     if (switching) {
-      quitRequested = true
       if (installer) void stopOwnedProcess(installer).catch(() => dialog.showErrorBox('进程清理失败', '插件安装进程停止尚未确认，请稍后检查。'))
       return
     }
@@ -508,6 +527,7 @@ if (!app.requestSingleInstanceLock()) {
       quitting = true
       app.quit()
     }).catch(error => {
+      quitRequested = false
       dialog.showErrorBox('暂时无法退出', error instanceof Error ? error.message : '请稍后重试')
     }).finally(() => { switching = false })
   })
